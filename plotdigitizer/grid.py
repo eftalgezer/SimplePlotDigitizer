@@ -26,8 +26,7 @@ def remove_horizontal_grid_simple(img) -> np.ndarray:
 
 def heal(orig):
     kernel = np.ones((3, 3), np.uint8)
-    img = cv.morphologyEx(orig.copy(), cv.MORPH_OPEN, kernel, iterations=2)
-    return img
+    return cv.morphologyEx(orig.copy(), cv.MORPH_OPEN, kernel, iterations=2)
 
 
 def remove_grid(
@@ -61,9 +60,9 @@ def test_remove_grid(imgfile: Path, debug: bool = True):
     img = cv.imread(str(imgfile), 0)
     if debug:
         _save_fig(img, f"{TEMP}/orig.png")
-    withoutgrid = remove_grid(img)
     # assert withoutgrid.mean() > img.mean()
     if debug:
+        withoutgrid = remove_grid(img)
         _save_fig(withoutgrid, f"{TEMP}/without_grid.png")
 
 
