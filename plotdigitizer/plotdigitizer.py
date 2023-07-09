@@ -86,9 +86,9 @@ def plot_traj(traj, outfile: Path):
 def click_points(event, x, y, _flags, params):
     global img_
     assert img_ is not None, "No data set"
-    # Function to record the clicks.
-    YROWS = img_.shape[0]
     if event == cv.EVENT_LBUTTONDOWN:
+        # Function to record the clicks.
+        YROWS = img_.shape[0]
         logging.info(f"You clicked on {(x, YROWS-y)}")
         locations_.append(geometry.Point(x, YROWS - y))
 
@@ -115,12 +115,11 @@ def ask_user_to_locate_points(points, img):
         key = cv.waitKey(1) & 0xFF
         if key == "q":
             break
-    logging.info("You clicked %s" % locations_)
+    logging.info(f"You clicked {locations_}")
 
 
 def list_to_points(points) -> T.List[geometry.Point]:
-    ps = [geometry.Point.fromCSV(x) for x in points]
-    return ps
+    return [geometry.Point.fromCSV(x) for x in points]
 
 
 def axis_transformation(p, P: T.List[geometry.Point]):
@@ -272,7 +271,7 @@ def run(args):
     with open(outfile, "w") as f:
         for r in traj:
             f.write("%g %g\n" % (r))
-    logging.info("Wrote trajectory to %s" % outfile)
+    logging.info(f"Wrote trajectory to {outfile}")
 
 
 def main():
