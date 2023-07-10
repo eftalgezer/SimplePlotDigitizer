@@ -45,7 +45,7 @@ setup(
         "Programming Language :: Python :: 3.11",
     ],
     keywords="plot digitizer, plot to data",
-    packages=["plotdigitizer"],
+    packages=["SimplePlotDigitizer"],
     install_requires=[
     "opencv-python",
     "numpy",
