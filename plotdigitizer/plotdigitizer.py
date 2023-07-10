@@ -11,6 +11,8 @@ import numpy as np
 import numpy.typing as npt
 import numpy.polynomial.polynomial as poly
 import cv2 as cv
+from PIL import Image
+import pytesseract
 
 import plotdigitizer.grid as grid
 from plotdigitizer.trajectory import find_trajectory, normalize
@@ -142,6 +144,10 @@ def process_image(img):
     img = normalize(img)
     traj, img = find_trajectory(img, trajcolor, T)
     return traj
+
+
+def find_points(img):
+    boxes = pytesseract.image_to_boxes(Image.open(img))
 
 
 def run(args):
