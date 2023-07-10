@@ -282,6 +282,15 @@ category = "dev"
 optional = false
 python-versions = ">=3.7.2"
 
+
+[[package]]
+category = "main"
+description = "Python-tesseract is a python wrapper for Google's Tesseract-OCR"
+name = "pytesseract"
+optional = false
+python-versions = "*"
+version = "0.3.10"
+
 [package.dependencies]
 astroid = ">=2.12.12,<=2.14.0-dev0"
 colorama = {version = ">=0.4.5", markers = "sys_platform == \"win32\""}
