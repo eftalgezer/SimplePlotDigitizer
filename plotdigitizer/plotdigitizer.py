@@ -183,9 +183,6 @@ def run(args):
 
     traj = process_image(img_)
 
-    if args_.plot is not None:
-        plot_traj(traj, args_.plot)
-
     outfile = args.output or f"{args.INPUT}.traj.csv"
     with open(outfile, "w") as f:
         for r in traj:
