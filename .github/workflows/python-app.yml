@@ -37,7 +37,6 @@ jobs:
         python -m pip install opencv-python
         python -m pip install numpy
         python -m pip install matplotlib
-        python -m pip install paddlepaddle
         python -m pip install paddleocr
         mkdir ~/.config/matplotlib/
         echo "backend: Agg" > ~/.config/matplotlib/matplotlibrc
