@@ -7,8 +7,6 @@ import tempfile
 import hashlib
 from pathlib import Path
 
-import cv2 as cv
-
 import numpy as np
 import numpy.typing as npt
 import numpy.polynomial.polynomial as poly
@@ -23,7 +21,6 @@ import logging
 LOGLEVEL = os.environ.get("LOGLEVEL", "INFO").upper()
 logging.basicConfig(level=LOGLEVEL)
 
-WindowName_ = "PlotDigitizer"
 ix_, iy_ = 0, 0
 params_: T.Dict[str, T.Any] = {}
 
@@ -89,23 +86,6 @@ def show_frame(img, msg="MSG: "):
     cv.putText(msgImg, msg, (1, 40), 0, 0.5, 255)
     newImg = np.vstack((img, msgImg.astype(np.uint8)))
     cv.imshow(WindowName_, newImg)
-
-
-def ask_user_to_locate_points(points, img):
-    global locations_
-    cv.namedWindow(WindowName_)
-    cv.setMouseCallback(WindowName_, click_points)
-    while len(locations_) < len(points):
-        i = len(locations_)
-        p = points[i]
-        pLeft = len(points) - len(locations_)
-        show_frame(img, "Please click on %s (%d left)" % (p, pLeft))
-        if len(locations_) == len(points):
-            break
-        key = cv.waitKey(1) & 0xFF
-        if key == "q":
-            break
-    logging.info(f"You clicked {locations_}")
 
 
 def list_to_points(points) -> T.List[geometry.Point]:
