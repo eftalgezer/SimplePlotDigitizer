@@ -299,14 +299,14 @@ testutils = ["gitpython (>3)"]
 
 [[package]]
 category = "main"
-description = "Python-tesseract is a python wrapper for Google's Tesseract-OCR"
-name = "pytesseract"
+description = "Paddle OCR"
+name = "paddleocr"
 optional = false
 python-versions = "*"
-version = "0.3.10"
+version = ">=2.0.1"
 
 [package.dependencies]
-Pillow = "*"
+paddlepaddle = "2.4.2"
 
 [[package]]
 name = "pyparsing"
@@ -840,9 +840,8 @@ pytest = [
     {file = "pytest-6.2.5-py3-none-any.whl", hash = "sha256:7310f8d27bc79ced999e760ca304d69f6ba6c6649c0b60fb0e04a4a77cacc134"},
     {file = "pytest-6.2.5.tar.gz", hash = "sha256:131b36680866a76e6781d13f101efb86cf674ebb9762eb70d3082b6f29889e89"},
 ]
-pytesseract = [
-    {file = "pytesseract-0.3.10.tar.gz", hash = "sha256:f1c3a8b0f07fd01a1085d451f5b8315be6eec1d5577a6796d46dc7a62bd4120f"},
-    {file = "pytesseract-0.3.10-py3-none-any.whl", hash = "sha256:8f22cc98f765bf13517ead0c70effedb46c153540d25783e04014f28b55a5fc6"},
+paddleocr = [
+    {file = "paddleocr-2.6.1.3-py3-none-any.whl", hash = "sha256:b49cf41e14815c76e16414f3f532bd81cb49f8537c9ba88352beb582bc6d76a6"},
 ]
 python-dateutil = [
     {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
