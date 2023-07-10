@@ -6,14 +6,11 @@ import typing as T
 import tempfile
 import hashlib
 from pathlib import Path
-
 import numpy as np
 import numpy.typing as npt
 import numpy.polynomial.polynomial as poly
 import cv2 as cv
-from PIL import Image
-import pytesseract
-
+from paddleocr import PaddleOCR
 import plotdigitizer.grid as grid
 from plotdigitizer.trajectory import find_trajectory, normalize
 import plotdigitizer.geometry as geometry
@@ -147,7 +144,15 @@ def process_image(img):
 
 
 def find_points(img):
-    boxes = pytesseract.image_to_boxes(Image.open(img))
+    points = []
+    for lang in ['ch', 'en', 'korean', 'japan', 'chinese_cht', 'ta', 'te', 'ka', 'latin', 'arabic', 'cyrillic', 'devanagari']:
+        ocr = PaddleOCR(use_angle_cls=True, lang=lang)
+        img_path = "/home/egezer/Downloads/trimmed.png"
+        result = ocr.ocr(img_path, cls=True)
+        for r in result[0]:
+            if r[1][0].isnumeric() and r[1][1]>=0.70 and [r[0], r[1][0]] not in points:
+                points.append([r[0], r[1][0]])
+    points.sort()
 
 
 def run(args):
