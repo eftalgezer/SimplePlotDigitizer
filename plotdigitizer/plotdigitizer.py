@@ -10,6 +10,7 @@ from pathlib import Path
 import numpy as np
 import numpy.typing as npt
 import numpy.polynomial.polynomial as poly
+import cv2 as cv
 
 import plotdigitizer.grid as grid
 from plotdigitizer.trajectory import find_trajectory, normalize
@@ -135,13 +136,11 @@ def process_image(img):
     T = transform_axis(img, erase_near_axis=3)
     assert img.std() > 0.0, "No data in the image!"
     logging.info(f" {img.mean()}  {img.std()}")
-    save_img_in_cache(img, f"{args_.INPUT.name}.transformed_axis.png")
 
     # extract the plot that has color which is farthest from the background.
     trajcolor = params_["timeseries_colors"][0]
     img = normalize(img)
     traj, img = find_trajectory(img, trajcolor, T)
-    save_img_in_cache(img, f"{args_.INPUT.name}.final.png")
     return traj
 
 
@@ -162,7 +161,6 @@ def run(args):
     if args_.preprocess:
         kernel = np.ones((1, 1), np.uint8)
         img_ = cv.morphologyEx(img_, cv.MORPH_CLOSE, kernel)
-        save_img_in_cache(img_, Path(f"{args_.INPUT.name}.close.png"))
 
     # remove grids.
     img_ = grid.remove_grid(img_)
@@ -172,7 +170,6 @@ def run(args):
     logging.debug(" {img_.min()=} {img_.max()=}")
     assert img_.max() <= 255
     assert img_.min() < img_.mean() < img_.max(), "Could not read meaningful data"
-    save_img_in_cache(img_, args_.INPUT.name)
 
     points_ = list_to_points(args.data_point)
     locations_ = list_to_points(args.location)
@@ -197,25 +194,6 @@ def main():
     description = """Digitize image."""
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument("INPUT", type=Path, help="Input image file.")
-    parser.add_argument(
-        "--data-point",
-        "-p",
-        required=True,
-        action="append",
-        help="Datapoints (min 3 required). You have to click on them later."
-        " At least 3 points are recommended. e.g -p 0,0 -p 10,0 -p 0,1 "
-        "Make sure that point are comma separated without any space.",
-    )
-    parser.add_argument(
-        "--location",
-        "-l",
-        required=False,
-        default=[],
-        action="append",
-        help="Location of a points on figure in pixels (integer)."
-        " These values should appear in the same order as -p option."
-        " If not given, you will be asked to click on the figure.",
-    )
     parser.add_argument(
         "--plot",
         default=None,
