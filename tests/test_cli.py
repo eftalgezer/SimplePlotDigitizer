@@ -31,27 +31,27 @@ def _check_csv_file(csvfile):
 
 def test_trimmeed():
     csvfile = _run_cmdline(
-        HERE / ".." / "figures" / "trimmed.png",
+        HERE / ".." / "figures" / "trimmed.png"
     )
     _check_csv_file(csvfile)
 
 
 def test_graph1():
     csvfile = _run_cmdline(
-        HERE / ".." / "figures" / "graphs_1.png",
+        HERE / ".." / "figures" / "graphs_1.png"
     )
     _check_csv_file(csvfile)
 
 
 def test_ecg():
     csvfile = _run_cmdline(
-        HERE / ".." / "figures" / "ECGImage.png",],
+        HERE / ".." / "figures" / "ECGImage.png"
     )
     _check_csv_file(csvfile)
 
 
 def test_grid():
     csvfile = _run_cmdline(
-        HERE / ".." / "figures" / "graph_with_grid.png",
+        HERE / ".." / "figures" / "graph_with_grid.png"
     )
     _check_csv_file(csvfile)
