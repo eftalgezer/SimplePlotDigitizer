@@ -43,51 +43,6 @@ def data_to_hash(data) -> str:
     return hashlib.sha1(data).hexdigest()
 
 
-def save_img_in_cache(
-    img: npt.ArrayLike, filename: T.Optional[T.Union[Path, str]] = None
-):
-    if filename is None:
-        filename = Path(f"{data_to_hash(img)}.png")
-    outpath = cache() / filename
-    cv.imwrite(str(outpath), img)
-    logging.debug(f" Saved to {outpath}")
-
-
-def plot_traj(traj, outfile: Path):
-    global locations_
-    import matplotlib.pyplot as plt
-
-    x, y = zip(*traj)
-    plt.figure()
-    plt.subplot(211)
-
-    for p in locations_:
-        csize = img_.shape[0] // 40
-        cv.circle(img_, (p.x, img_.shape[0] - p.y), csize, 128, -1)
-
-    plt.imshow(img_, interpolation="none", cmap="gray")
-    plt.axis(False)
-    plt.title("Original")
-    plt.subplot(212)
-    plt.title("Reconstructed")
-    plt.plot(x, y)
-    plt.tight_layout()
-    if not str(outfile):
-        plt.show()
-    else:
-        plt.savefig(outfile)
-        logging.info(f"Saved to {outfile}")
-    plt.close()
-
-
-def show_frame(img, msg="MSG: "):
-    global WindowName_
-    msgImg = np.zeros(shape=(50, img.shape[1]))
-    cv.putText(msgImg, msg, (1, 40), 0, 0.5, 255)
-    newImg = np.vstack((img, msgImg.astype(np.uint8)))
-    cv.imshow(WindowName_, newImg)
-
-
 def list_to_points(points) -> T.List[geometry.Point]:
     return [geometry.Point.fromCSV(x) for x in points]
 
@@ -95,7 +50,6 @@ def list_to_points(points) -> T.List[geometry.Point]:
 def axis_transformation(p, P: T.List[geometry.Point]):
     """Compute m and offset for model Y = m X + offset that is used to transform
     axis X to Y"""
-
     # Currently only linear maps and only 2D.
     px, py = zip(*p)
     Px, Py = zip(*P)
@@ -224,13 +178,6 @@ def run(args):
     points_ = list_to_points(args.data_point)
     locations_ = list_to_points(args.location)
     logging.debug(f"data points {args.data_point} → location on image {args.location}")
-
-    if len(locations_) != len(points_):
-        logging.warning(
-            "Either the location of data-points are not specified or their numbers don't"
-            " match with given datapoints. Asking user..."
-        )
-        ask_user_to_locate_points(points_, img_)
 
     traj = process_image(img_)
 
