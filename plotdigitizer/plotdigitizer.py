@@ -83,16 +83,6 @@ def plot_traj(traj, outfile: Path):
     plt.close()
 
 
-def click_points(event, x, y, _flags, params):
-    global img_
-    assert img_ is not None, "No data set"
-    if event == cv.EVENT_LBUTTONDOWN:
-        # Function to record the clicks.
-        YROWS = img_.shape[0]
-        logging.info(f"You clicked on {(x, YROWS-y)}")
-        locations_.append(geometry.Point(x, YROWS - y))
-
-
 def show_frame(img, msg="MSG: "):
     global WindowName_
     msgImg = np.zeros(shape=(50, img.shape[1]))
