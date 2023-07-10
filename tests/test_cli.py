@@ -12,7 +12,7 @@ HERE = Path(__file__).parent.resolve()
 
 
 def _run_cmdline(infile: Path, points, locations):
-    cmd = f"plotdigitizer {str(infile)} "
+    cmd = f"SimplePlotDigitizer {str(infile)} "
     pts = " ".join([f"-p {','.join(map(str,pt))}" for pt in points])
     locs = " ".join([f"-l {','.join(map(str,pt))}" for pt in locations])
     cmd += f"{pts} {locs}"
