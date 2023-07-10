@@ -13,7 +13,8 @@ python = "^3.8"
 opencv-python = "^4.5.1"
 numpy = "^1.23"
 matplotlib = "^3.3.4"
-pytesseract = "^0.3.10"
+paddlepaddle = "^2.4.1"
+paddleocr = ">=2.0.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"
