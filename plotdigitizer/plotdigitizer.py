@@ -166,7 +166,6 @@ def run(args):
 
     # remove grids.
     img_ = grid.remove_grid(img_)
-    save_img_in_cache(img_, Path(f"{args_.INPUT.name}.without_grid.png"))
 
     # rescale it again.
     img_ = normalize(img_)
