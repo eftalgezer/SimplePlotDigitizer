@@ -6,7 +6,7 @@ import subprocess
 import numpy as np
 from pathlib import Path
 
-import plotdigitizer
+import SimplePlotDigitizer
 
 HERE = Path(__file__).parent.resolve()
 
