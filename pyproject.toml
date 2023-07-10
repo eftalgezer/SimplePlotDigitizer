@@ -13,6 +13,7 @@ python = "^3.8"
 opencv-python = "^4.5.1"
 numpy = "^1.23"
 matplotlib = "^3.3.4"
+pytesseract = "^0.3.10"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"
@@ -20,7 +21,6 @@ matplotlib = "^3.4.2"
 
 [tool.poetry.scripts]
 plotdigitizer = 'plotdigitizer.plotdigitizer:main'
-plotdigitizer-locate = 'plotdigitizer.locate:main'
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^0.982"
