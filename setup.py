@@ -45,6 +45,11 @@ setup(
     "paddlepaddle",
     "paddleocr"
     ],
+    entry_points={
+    "console_scripts": [
+        "SimplePlotDigitizer= SimplePlotDigitizer",
+    ]
+    }
     project_urls={
         "Bug Reports": "https://github.com/eftalgezer/SimplePlotDigitizer/issues",
         "Source": "https://github.com/eftalgezer/SimplePlotDigitizer/",
