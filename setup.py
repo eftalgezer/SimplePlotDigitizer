@@ -1,5 +1,5 @@
 """
-Setup file for fstring_to_format
+Setup file for SimplePlotDigitizer
 """
 from __future__ import absolute_import
 from __future__ import with_statement
@@ -49,7 +49,7 @@ setup(
     "console_scripts": [
         "SimplePlotDigitizer= SimplePlotDigitizer",
     ]
-    }
+    },
     project_urls={
         "Bug Reports": "https://github.com/eftalgezer/SimplePlotDigitizer/issues",
         "Source": "https://github.com/eftalgezer/SimplePlotDigitizer/",
