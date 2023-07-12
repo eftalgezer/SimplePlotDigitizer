@@ -53,7 +53,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "SimplePlotDigitizer = SimplePlotDigitizer.__main__:main",
+            "SimplePlotDigitizer=SimplePlotDigitizer.__main__:main",
         ]
     }
 )
