@@ -1,4 +1,4 @@
-![Python application](https://github.com/dilawar/PlotDigitizer/workflows/Python%20application/badge.svg) [![PyPI version](https://badge.fury.io/py/plotdigitizer.svg)](https://badge.fury.io/py/plotdigitizer) [![DOI](https://zenodo.org/badge/140683649.svg)](https://zenodo.org/badge/latestdoi/140683649)
+![Python application](https://github.com/eftalgezer/SimplePlotDigitizer/workflows/Python%20app/badge.svg) [![PyPI version](https://badge.fury.io/py/SimplePlotDigitizer.svg)](https://badge.fury.io/py/SimplePlotDigitizer) [![DOI](https://zenodo.org/badge/140683649.svg)](https://zenodo.org/badge/latestdoi/140683649)
 
 A Python3 command line utility to digitize plots in batch mode.
 
