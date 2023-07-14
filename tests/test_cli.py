@@ -6,13 +6,13 @@ import subprocess
 import numpy as np
 from pathlib import Path
 
-import SimplePlotDigitizer
+import PlotScan
 
 HERE = Path(__file__).parent.resolve()
 
 
 def _run_cmdline(infile: Path,):
-    cmd = f"SimplePlotDigitizer {str(infile)} "
+    cmd = f"PlotScan {str(infile)} "
     outfile = infile.with_suffix(".result.png")
     trajfile = infile.with_suffix(".result.csv")
     cmd += f" --plot {str(outfile)} --output {trajfile}"
