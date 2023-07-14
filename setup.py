@@ -1,5 +1,5 @@
 """
-Setup file for SimplePlotDigitizer
+Setup file for PlotScan
 """
 from __future__ import absolute_import
 from __future__ import with_statement
@@ -15,7 +15,7 @@ with io.open("{0}{1}README.md".format(HERE, os.sep), "r", encoding="utf-8") as r
     LONG_DESCRIPTION = readme.read()
 
 setup(
-    name="SimplePlotDigitizer",
+    name="PlotScan",
     version="0.1.0",
     description="A Python command line utility to digitize plots in batch mode.",
     long_description=LONG_DESCRIPTION,
@@ -37,7 +37,7 @@ setup(
         "Programming Language :: Python :: 3.11",
     ],
     keywords="plot digitizer, plot to data",
-    packages=["SimplePlotDigitizer"],
+    packages=["PlotScan"],
     install_requires=[
     "opencv-python",
     "numpy",
@@ -46,14 +46,14 @@ setup(
     "paddleocr"
     ],
     project_urls={
-        "Bug Reports": "https://github.com/eftalgezer/SimplePlotDigitizer/issues",
-        "Source": "https://github.com/eftalgezer/SimplePlotDigitizer/",
-        "Blog": "https://beyondthearistotelian.blogspot.com/search/label/SimplePlotDigitizer",
+        "Bug Reports": "https://github.com/eftalgezer/PlotScan/issues",
+        "Source": "https://github.com/eftalgezer/PlotScan",
+        "Blog": "https://beyondthearistotelian.blogspot.com/search/label/PlotScan",
         "Developer": "https://www.eftalgezer.com/",
     },
     entry_points={
         "console_scripts": [
-            "SimplePlotDigitizer=SimplePlotDigitizer.__main__:main",
+            "PlotScan = PlotScan.__main__:main",
         ]
     }
 )
