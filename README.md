@@ -1,4 +1,4 @@
-![Python application](https://github.com/eftalgezer/SimplePlotDigitizer/workflows/Python%20app/badge.svg) [![PyPI version](https://badge.fury.io/py/PlotScan.svg)](https://badge.fury.io/py/PlotScan) [![DOI](https://zenodo.org/badge/140683649.svg)](https://zenodo.org/badge/latestdoi/140683649)
+![Python application](https://github.com/eftalgezer/PlotScan/workflows/Python%20app/badge.svg) [![PyPI version](https://badge.fury.io/py/PlotScan.svg)](https://badge.fury.io/py/PlotScan) [![DOI](https://zenodo.org/badge/140683649.svg)](https://zenodo.org/badge/latestdoi/140683649)
 
 A Python3 command line utility to digitize plots in batch mode.
 
