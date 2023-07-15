@@ -53,7 +53,8 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "PlotScan = PlotScan.__main__:main",
+            "PlotScan=PlotScan.__main__:main",
+            scripts=['bin/PlotScan'],
         ]
     }
 )
