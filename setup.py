@@ -51,10 +51,5 @@ setup(
         "Blog": "https://beyondthearistotelian.blogspot.com/search/label/PlotScan",
         "Developer": "https://www.eftalgezer.com/",
     },
-    entry_points={
-        "console_scripts": [
-            "PlotScan=PlotScan.__main__:main",
-        ]
-    },
     scripts=['bin/PlotScan'],
 )
