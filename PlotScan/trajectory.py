@@ -1,6 +1,3 @@
-__author__ = "Dilawar Singh"
-__email__ = "dilawar.s.rajput@gmail.com"
-
 import numpy as np
 import cv2 as cv
 from collections import defaultdict
