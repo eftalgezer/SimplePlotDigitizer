@@ -1,6 +1,3 @@
-__author__ = "Dilawar Singh"
-__email__ = "dilawar.s.rajput@gmail.com"
-
 from pathlib import Path
 import cv2 as cv
 import numpy as np
