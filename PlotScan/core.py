@@ -11,9 +11,9 @@ import numpy.typing as npt
 import numpy.polynomial.polynomial as poly
 import cv2 as cv
 from paddleocr import PaddleOCR
-import .grid as grid
+import PlotScan.grid as grid
 from .trajectory import find_trajectory, normalize
-import .geometry as geometry
+import PlotScan.geometry as geometry
 
 # Logger
 import logging
