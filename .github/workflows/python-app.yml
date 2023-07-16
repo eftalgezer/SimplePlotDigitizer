@@ -46,12 +46,12 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      run: |
-        pytest
     - name: Check entry point
       run: |
         python -m pkg_resources --list-entry-points PlotScan
+    - name: Test with pytest
+      run: |
+        pytest
     - name: Generate Report
       run: |
         pip install codecov
@@ -64,14 +64,14 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
         directory: ./coverage/reports/
         env_vars: OS,PYTHON
-        files: /home/runner/work/SIESTAstepper/SIESTAstepper/coverage.xml
+        files: /home/runner/work/PlotScan/PlotScan/coverage.xml
         flags: tests
     - name: Upload testing report to Codacy
       uses: codacy/codacy-coverage-reporter-action@v1
       with:
         project-token: ${{ secrets.codacy_token }}
-        coverage-reports: /home/runner/work/SIESTAstepper/SIESTAstepper/coverage.xml
+        coverage-reports: /home/runner/work/PlotScan/PlotScan/coverage.xml
     - name: See coverage
       run: |
-          cd /home/runner/work/SIESTAstepper/SIESTAstepper/
+          cd /home/runner/work/PlotScan/PlotScan/
           ls
