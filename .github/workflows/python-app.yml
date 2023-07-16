@@ -49,7 +49,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Check entry point
       run: |
-        python -m PlotScan --list-entry-points PlotScan
+        python -m pkg_resources --list-entry-points PlotScan
     - name: Test with pytest
       run: |
         pytest
