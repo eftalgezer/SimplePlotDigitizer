@@ -38,7 +38,7 @@ setup(
     ],
     keywords="plot digitizer, plot to data",
     packages=["PlotScan"],
-    py_modules=["PlotScan"]
+    py_modules=["PlotScan"],
     install_requires=[
     "opencv-python",
     "numpy",
