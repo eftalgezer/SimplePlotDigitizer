@@ -3,17 +3,14 @@ import typing as T
 import tempfile
 import hashlib
 from pathlib import Path
+import logging
 import numpy as np
-import numpy.typing as npt
 import numpy.polynomial.polynomial as poly
 import cv2 as cv
 from paddleocr import PaddleOCR
-import PlotScan.grid as grid
+from PlotScan import grid
 from .trajectory import find_trajectory, normalize
 import PlotScan.geometry as geometry
-
-# Logger
-import logging
 
 LOGLEVEL = os.environ.get("LOGLEVEL", "INFO").upper()
 logging.basicConfig(level=LOGLEVEL)
