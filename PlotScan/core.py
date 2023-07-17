@@ -1,6 +1,3 @@
-__author__ = "Dilawar Singh"
-__email__ = "dilawar.s.rajput@gmail.com"
-
 import os
 import typing as T
 import tempfile
