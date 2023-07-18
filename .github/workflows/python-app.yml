@@ -44,7 +44,8 @@ jobs:
         echo "backend: Agg" > ~/.config/matplotlib/matplotlibrc
     - name: Run entry point
       run: |
-        which PlotScan
+        pip install .
+        PlotScan figures/trimmed.png
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
