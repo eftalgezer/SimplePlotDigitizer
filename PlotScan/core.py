@@ -176,9 +176,9 @@ def run(args):
     assert img_.max() <= 255
     assert img_.min() < img_.mean() < img_.max(), "Could not read meaningful data"
 
-    points_ = list_to_points(args.data_point)
-    locations_ = list_to_points(args.location)
-    logging.debug(f"data points {args.data_point} → location on image {args.location}")
+    #points_ = list_to_points(args.data_point)
+    #locations_ = list_to_points(args.location)
+    #logging.debug(f"data points {args.data_point} → location on image {args.location}")
 
     traj = process_image(img_)
 
