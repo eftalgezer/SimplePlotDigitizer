@@ -1,3 +1,6 @@
+"""
+Module bundling all functions needed to digitise a scientific plot
+"""
 import os
 import typing as T
 import tempfile
