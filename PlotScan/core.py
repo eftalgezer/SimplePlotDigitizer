@@ -13,7 +13,7 @@ import cv2 as cv
 from paddleocr import PaddleOCR
 from PlotScan import grid
 from .trajectory import find_trajectory, normalize
-import PlotScan.geometry as geometry
+from PlotScan import geometry
 
 LOGLEVEL = os.environ.get("LOGLEVEL", "INFO").upper()
 logging.basicConfig(level=LOGLEVEL)
