@@ -1,10 +1,12 @@
+"""
+PlotScan terminal client
+"""
 import argparse
 from pathlib import Path
 from .core import run
 
 def main():
-    # Argument parser.
-
+    """Main function"""
     description = """Digitize image."""
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument("INPUT", type=Path, help="Input image file.")
