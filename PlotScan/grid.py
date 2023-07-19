@@ -13,9 +13,9 @@ def _save_fig(img, outfile):
 
 
 def remove_horizontal_grid_simple(img) -> np.ndarray:
-    μ, σ = img.mean(), img.std()
+    mu, sigma = img.mean(), img.std()
     for i, row in enumerate(img):
-        if row.mean() < μ - σ:
+        if row.mean() < mu - sigma:
             # I can simply remove the row.
             img[i, :] = img.max()
     return img
