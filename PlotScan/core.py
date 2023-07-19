@@ -12,8 +12,8 @@ import numpy.polynomial.polynomial as poly
 import cv2 as cv
 from paddleocr import PaddleOCR
 from PlotScan import grid
-from .trajectory import find_trajectory, normalize
 from PlotScan import geometry
+from .trajectory import find_trajectory, normalize
 
 LOGLEVEL = os.environ.get("LOGLEVEL", "INFO").upper()
 logging.basicConfig(level=LOGLEVEL)
