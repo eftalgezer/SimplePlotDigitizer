@@ -1,11 +1,7 @@
-__author__ = "Dilawar Singh"
-__email__ = "dilawar@subcom.tech"
-
 import sys
 import subprocess
-import numpy as np
 from pathlib import Path
-
+import numpy as np
 import PlotScan
 
 HERE = Path(__file__).parent.resolve()
