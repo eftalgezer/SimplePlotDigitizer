@@ -1,6 +1,7 @@
 """
 Module bundling all functions needed to digitise a scientific plot
 """
+import sys
 import os
 import typing as T
 import tempfile
@@ -104,7 +105,7 @@ def _find_trajectory_colors(
         logging.error(
             "I computed that background is 'dark' which is unacceptable to me."
         )
-        quit(-1)
+        sys.exit()
 
     # If the background is white, search from the trajectories from the black.
     trajcolors = [int(b) for h, b in hist if h > 0 and b / bgcolor < 0.5]
