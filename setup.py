@@ -4,8 +4,8 @@ Setup file for PlotScan
 from __future__ import absolute_import
 from __future__ import with_statement
 import os
-from setuptools import setup
 import io
+from setuptools import setup
 
 HERE = os.getcwd().replace("{0}setup.py".format(os.sep), "")
 
