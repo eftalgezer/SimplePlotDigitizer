@@ -1,8 +1,7 @@
 from pathlib import Path
+import tempfile
 import cv2 as cv
 import numpy as np
-
-import tempfile
 
 TEMP = tempfile.gettempdir()
 
