@@ -141,7 +141,7 @@ def process_image(img):
     return traj
 
 
-def find_points(img):
+def find_points(img_path):
     points = []
     for lang in ['ch', 'en', 'korean', 'japan', 'chinese_cht', 'ta', 'te', 'ka', 'latin', 'arabic', 'cyrillic', 'devanagari']:
         ocr = PaddleOCR(use_angle_cls=True, lang=lang)
