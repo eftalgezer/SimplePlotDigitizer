@@ -1,7 +1,7 @@
+import logging
+from collections import defaultdict
 import numpy as np
 import cv2 as cv
-from collections import defaultdict
-import logging
 
 
 def _find_center(vec):
