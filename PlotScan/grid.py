@@ -37,8 +37,8 @@ def remove_grid(
     )
     cnts = cv.findContours(remove_horizontal, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
     cnts = cnts[0] if len(cnts) == 2 else cnts[1]
-    for c in cnts:
-        cv.drawContours(img, [c], -1, background_color, grid_size)
+    for cnt in cnts:
+        cv.drawContours(img, [cnt], -1, background_color, grid_size)
 
     # Remove vertical lines
     vertical_kernel = cv.getStructuringElement(cv.MORPH_RECT, (1, 40))
@@ -47,8 +47,8 @@ def remove_grid(
     )
     cnts = cv.findContours(remove_vertical, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
     cnts = cnts[0] if len(cnts) == 2 else cnts[1]
-    for c in cnts:
-        cv.drawContours(img, [c], -1, background_color, grid_size)
+    for cnt in cnts:
+        cv.drawContours(img, [cnt], -1, background_color, grid_size)
     return img
 
 
