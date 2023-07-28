@@ -157,12 +157,12 @@ def run(args):
     logging.debug(" {img_.min()=} {img_.max()=}")
     assert img_.max() <= 255
     assert img_.min() < img_.mean() < img_.max(), "Could not read meaningful data"
-    if args.points:
+    if args.data_point:
         points_ = list_to_points(args.data_point)
     else:
         points = find_points(infile)
         points_ = list_to_points([point[1] for point in points])
-    if args.locations:
+    if args.location:
         locations_ = list_to_points(args.location)
     else:
         points = find_points(infile)
@@ -170,7 +170,7 @@ def run(args):
     #logging.debug(f"data points {args.data_point} → location on image {args.location}")
 
     traj = process_image(img_)
-    if args_.plot is not None:
+    if args_.plot:
         plot_traj(traj, args_.plot)
     outfile = args.output or f"{args.INPUT}.traj.csv"
     with open(outfile, "w") as f:
