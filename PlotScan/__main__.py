@@ -13,7 +13,8 @@ def main():
     parser.add_argument(
         "--data-point",
         "-p",
-        required=True,
+        required=False,
+        default=None
         action="append",
         help="Datapoints (min 3 required)."
         " At least 3 points are recommended. e.g -p 0,0 -p 10,0 -p 0,1 "
@@ -23,7 +24,7 @@ def main():
         "--location",
         "-l",
         required=False,
-        default=[],
+        default=None,
         action="append",
         help="Location of a points on figure in pixels (integer)."
         " These values should appear in the same order as -p option."
