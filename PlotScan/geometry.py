@@ -9,8 +9,11 @@ class Point:
         self.y = int(y)
 
     @classmethod
-    def from_list(cls, coords: list) -> "Point":
-        xy = [float(coord) for coord in coords]
+    def convert(cls, coords) -> "Point":
+        if isinstance(coords, str):
+            xy = [float(coord) for coord in coords.split(",")]
+        else:
+            xy = [float(coord) for coord in coords]
         return cls(xy[0], xy[1])
 
     def __eq__(self, other) -> bool:
