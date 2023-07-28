@@ -11,6 +11,25 @@ def main():
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument("INPUT", type=Path, help="Input image file.")
     parser.add_argument(
+        "--data-point",
+        "-p",
+        required=True,
+        action="append",
+        help="Datapoints (min 3 required)."
+        " At least 3 points are recommended. e.g -p 0,0 -p 10,0 -p 0,1 "
+        "Make sure that point are comma separated without any space.",
+    )
+    parser.add_argument(
+        "--location",
+        "-l",
+        required=False,
+        default=[],
+        action="append",
+        help="Location of a points on figure in pixels (integer)."
+        " These values should appear in the same order as -p option."
+        " If not given, you will be asked to click on the figure.",
+    )
+    parser.add_argument(
         "--plot",
         default=None,
         required=False,
