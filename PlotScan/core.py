@@ -11,7 +11,6 @@ import logging
 import numpy as np
 import numpy.polynomial.polynomial as poly
 import cv2 as cv
-from paddleocr import PaddleOCR
 from PlotScan import grid
 from PlotScan import geometry
 from .trajectory import find_trajectory, normalize
