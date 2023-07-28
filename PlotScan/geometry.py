@@ -9,8 +9,8 @@ class Point:
         self.y = int(y)
 
     @classmethod
-    def fromCSV(cls, csv: str) -> "Point":
-        xy = [float(x) for x in csv.split(",")]
+    def from_list(cls, coords: list) -> "Point":
+        xy = [float(coord) for coord in coords]
         return cls(xy[0], xy[1])
 
     def __eq__(self, other) -> bool:
