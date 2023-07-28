@@ -7,6 +7,8 @@ HERE = Path(__file__).parent.resolve()
 
 
 def _run_cmdline(infile: Path, points=None, locations=None):
+    pts = None
+    locs = None
     cmd = f"PlotScan {str(infile)} "
     if points:
         pts = " ".join([f"-p {','.join(map(str,pt))}" for pt in points])
