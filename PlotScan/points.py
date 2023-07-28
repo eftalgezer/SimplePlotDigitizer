@@ -1,3 +1,6 @@
+"""
+Detect the points from a scientific figure with OCR
+"""
 import math
 from paddleocr import PaddleOCR
 
