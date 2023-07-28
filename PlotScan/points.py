@@ -166,11 +166,10 @@ def find_center_period(points, axis):
         int: The center period of the given axis.
     """
     sorted_points = sorted(points, key=lambda point: point[1][axis])
-    gaps = []
-    for i in range(len(sorted_points) - 1):
-        current_pos = sorted_points[i][1][axis]
-        next_pos = sorted_points[i + 1][1][axis]
-        gaps.append(abs(next_pos - current_pos))
+    gaps = [
+        abs(sorted_points[i + 1][1][axis] - sorted_points[i][1][axis])
+        for i in range(len(sorted_points) - 1)
+    ]
     return int(sum(gaps) / len(gaps))
 
 
