@@ -33,7 +33,7 @@ def find_origin(pts: T.List[Point]) -> Point:
     """Compute origin of given points."""
     horizontal = set()
     for i, p1 in enumerate(pts):
-        for _, p2 in enumerate(pts[i + 1 :]):
+        for p2 in pts[i + 1:]:
             if abs(p1.x - p2.x) <= 2:
                 continue
             m = (p2.y - p1.y) / (p2.x - p1.x)

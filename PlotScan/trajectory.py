@@ -27,7 +27,7 @@ def fit_trajectory_using_median(traj, T, img):
 
         vals = np.array(traj[k])
 
-        # For each x, we may multiple pixels in column of the image which might
+        # For each x, we may multiply pixels in column of the image which might
         # be y. Usually experience is that the trajectories are close to the
         # top rather to the bottom. So we discard call pixel which are below
         # the center of mass (median here)

@@ -5,6 +5,7 @@ import argparse
 from pathlib import Path
 from .core import run
 
+
 def main():
     """Main function"""
     description = """Digitize image."""
@@ -17,8 +18,8 @@ def main():
         default=None,
         action="append",
         help="Datapoints (min 3 required)."
-        " At least 3 points are recommended. e.g -p 0,0 -p 10,0 -p 0,1 "
-        "Make sure that point are comma separated without any space.",
+             " At least 3 points are recommended. e.g -p 0,0 -p 10,0 -p 0,1 "
+             "Make sure that point are comma separated without any space.",
     )
     parser.add_argument(
         "--location",
@@ -27,8 +28,8 @@ def main():
         default=None,
         action="append",
         help="Location of a points on figure in pixels (integer)."
-        " These values should appear in the same order as -p option."
-        " If not given, you will be asked to click on the figure.",
+             " These values should appear in the same order as -p option."
+             " If not given, you will be asked to click on the figure.",
     )
     parser.add_argument(
         "--plot",
@@ -42,7 +43,7 @@ def main():
         required=False,
         type=str,
         help="Name of the output file else trajectory will be written to "
-        " <INPUT>.traj.csv",
+             " <INPUT>.traj.csv",
     )
     parser.add_argument(
         "--preprocess",

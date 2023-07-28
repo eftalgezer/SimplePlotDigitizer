@@ -4,7 +4,6 @@ Module bundling all functions needed to digitise a scientific plot
 import sys
 import os
 import typing as T
-import tempfile
 import hashlib
 from pathlib import Path
 import logging
@@ -43,7 +42,7 @@ def axis_transformation(p, P: T.List[geometry.Point]):
     Px, Py = zip(*P)
     offX, sX = poly.polyfit(px, Px, 1)
     offY, sY = poly.polyfit(py, Py, 1)
-    return ((sX, sY), (offX, offY))
+    return (sX, sY), (offX, offY)
 
 
 def transform_axis(img, erase_near_axis: int = 0):
@@ -56,16 +55,16 @@ def transform_axis(img, erase_near_axis: int = 0):
     offCols, offRows = p.x, p.y
     logging.info(f"{locations_} → origin {offCols}, {offRows}")
     img[:, : offCols + erase_near_axis] = params_["background"]
-    img[-offRows - erase_near_axis :, :] = params_["background"]
+    img[-offRows - erase_near_axis:, :] = params_["background"]
     logging.debug(f"Tranformation params: {T}")
     return T
 
 
 def _find_trajectory_colors(
-    img: np.ndarray, plot: bool = False
+        img: np.ndarray, plot: bool = False
 ) -> T.Tuple[int, T.List[int]]:
     # Each trajectory color x is bounded in the range x-3 to x+2 (interval of
-    # 5) -> total 51 bins. Also it is very unlikely that colors which are too
+    # 5) -> total 51 bins. Also, it is very unlikely that colors which are too
     # close to each other are part of different trajecotries. It is safe to
     # assme a binwidth of at least 10px.
     hs, bs = np.histogram(img.flatten(), 255 // 10, (0, img.max()))
@@ -106,7 +105,7 @@ def compute_foregrond_background_stats(img) -> T.Dict[str, float]:
     """Compute foreground and background color."""
     params: T.Dict[str, T.Any] = {}
     # Compute the histogram. It should be a multimodal histogram. Find peaks
-    # and these are the colors of background and foregorunds. Currently
+    # and these are the colors of background and foregorunds. Currently,
     # implementation is very simple.
     bgcolor, trajcolors = _find_trajectory_colors(img)
     params["background"] = bgcolor
@@ -167,7 +166,7 @@ def run(args):
     else:
         points = find_points(infile)
         locations_ = list_to_points([point[0] for point in points])
-    #logging.debug(f"data points {args.data_point} → location on image {args.location}")
+    # logging.debug(f"data points {args.data_point} → location on image {args.location}")
 
     traj = process_image(img_)
     if args_.plot:
@@ -175,5 +174,5 @@ def run(args):
     outfile = args.output or f"{args.INPUT}.traj.csv"
     with open(outfile, "w") as f:
         for r in traj:
-            f.write("%g %g\n" % (r))
+            f.write("%g %g\n" % r)
     logging.info(f"Wrote trajectory to {outfile}")

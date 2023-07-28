@@ -41,11 +41,11 @@ setup(
     zip_safe=False,
     include_package_data=True,
     install_requires=[
-    "opencv-python",
-    "numpy",
-    "matplotlib",
-    "paddlepaddle",
-    "paddleocr"
+        "opencv-python",
+        "numpy",
+        "matplotlib",
+        "paddlepaddle",
+        "paddleocr"
     ],
     project_urls={
         "Bug Reports": "https://github.com/eftalgezer/PlotScan/issues",
