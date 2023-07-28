@@ -14,7 +14,7 @@ def main():
         "--data-point",
         "-p",
         required=False,
-        default=None
+        default=None,
         action="append",
         help="Datapoints (min 3 required)."
         " At least 3 points are recommended. e.g -p 0,0 -p 10,0 -p 0,1 "
