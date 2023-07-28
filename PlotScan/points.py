@@ -230,6 +230,7 @@ def find_actual_points(points, pixel_tolerance=1):
 
 
 def find_points(img_path):
+    print(img_path)
     points = []
     for lang in [
         "latin",
