@@ -230,7 +230,7 @@ def find_actual_points(points, pixel_tolerance=1):
 
 
 def find_points(img_path):
-    print(img_path)
+    print(str(img_path))
     points = []
     for lang in [
         "latin",
@@ -240,7 +240,7 @@ def find_points(img_path):
         "ch",
     ]:
         ocr = PaddleOCR(use_angle_cls=True, lang=lang)
-        result = ocr.ocr(img_path, cls=True)
+        result = ocr.ocr(str(img_path), cls=True)
         for r in result:
             points.extend([line[0], None, float(line[1][0])] for line in r if line[1][0].isnumeric())
     points = sorted(points, key=lambda rect: rect[0][0][0])
