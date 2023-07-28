@@ -9,10 +9,10 @@ def are_rectangles_equal(rect1, rect2, pixel_tolerance=1):
     """
     Check if two rectangles are equal within the given pixel tolerance.
 
-    Parameters:
-        rect1 (list): The first rectangle in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
-        rect2 (list): The second rectangle in the same format as rect1.
-        pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates for the rectangles to be considered equal. Default is 1.
+    Parameters: rect1 (list): The first rectangle in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
+    center_y], label]. rect2 (list): The second rectangle in the same format as rect1. pixel_tolerance (int,
+    optional): The maximum allowable difference in pixel coordinates for the rectangles to be considered equal.
+    Default is 1.
 
     Returns:
         bool: True if the rectangles are equal within the pixel_tolerance, False otherwise.
@@ -34,9 +34,9 @@ def remove_duplicate_rectangles(rectangles, pixel_tolerance=1):
     """
     Remove duplicate rectangles from the list of rectangles.
 
-    Parameters:
-        rectangles (list): List of rectangles in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
-        pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates for the rectangles to be considered duplicate. Default is 1.
+    Parameters: rectangles (list): List of rectangles in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]],
+    [center_x, center_y], label]. pixel_tolerance (int, optional): The maximum allowable difference in pixel
+    coordinates for the rectangles to be considered duplicate. Default is 1.
 
     Returns:
         list: A list of unique rectangles after removing duplicates.
@@ -55,9 +55,8 @@ def find_period(points, axis):
     """
     Find the period of the given axis based on the points.
 
-    Parameters:
-        points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
-        axis (int): The axis to find the period for (0 for X-axis, 1 for Y-axis).
+    Parameters: points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
+    center_y], label]. axis (int): The axis to find the period for (0 for X-axis, 1 for Y-axis).
 
     Returns:
         int or None: The period of the given axis if found, or None if no period is detected.
@@ -73,8 +72,8 @@ def remove_overlapping_rectangles(rectangles):
     """
     Remove overlapping rectangles from the list of rectangles.
 
-    Parameters:
-        rectangles (list): List of rectangles in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
+    Parameters: rectangles (list): List of rectangles in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]],
+    [center_x, center_y], label].
 
     Returns:
         list: A list of non-overlapping rectangles.
@@ -92,9 +91,8 @@ def is_rect_overlapping(rect1, rect2):
     """
     Check if two rectangles are overlapping.
 
-    Parameters:
-        rect1 (list): The first rectangle in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
-        rect2 (list): The second rectangle in the same format as rect1.
+    Parameters: rect1 (list): The first rectangle in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
+    center_y], label]. rect2 (list): The second rectangle in the same format as rect1.
 
     Returns:
         bool: True if the rectangles are overlapping, False otherwise.
@@ -114,9 +112,9 @@ def find_intersection(points, pixel_tolerance=1):
     """
     Find the intersection point of two orthogonal lines among the given points.
 
-    Parameters:
-        points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
-        pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates for lines to be considered orthogonal. Default is 1.
+    Parameters: points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
+    center_y], label]. pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates for
+    lines to be considered orthogonal. Default is 1.
 
     Returns:
         tuple: The (x, y) coordinates of the intersection point.
@@ -158,9 +156,8 @@ def find_center_period(points, axis):
     """
     Find the center period of the given axis based on the points.
 
-    Parameters:
-        points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
-        axis (int): The axis to find the center period for (0 for X-axis, 1 for Y-axis).
+    Parameters: points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
+    center_y], label]. axis (int): The axis to find the center period for (0 for X-axis, 1 for Y-axis).
 
     Returns:
         int: The center period of the given axis.
@@ -177,10 +174,9 @@ def are_lines_orthogonal(line1, line2, angle_tolerance=5):
     """
     Check if two lines are orthogonal.
 
-    Parameters:
-        line1 (list): The first line defined by two points [point1, point2].
-        line2 (list): The second line defined by two points [point1, point2].
-        angle_tolerance (float, optional): The maximum allowable difference in angle degrees for the lines to be considered orthogonal. Default is 5.
+    Parameters: line1 (list): The first line defined by two points [point1, point2]. line2 (list): The second line
+    defined by two points [point1, point2]. angle_tolerance (float, optional): The maximum allowable difference in
+    angle degrees for the lines to be considered orthogonal. Default is 5.
 
     Returns:
         bool: True if the lines are orthogonal, False otherwise.
@@ -198,9 +194,9 @@ def find_orthogonal_lines(points, pixel_tolerance=1):
     """
     Find pairs of orthogonal lines among the given points.
 
-    Parameters:
-        points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
-        pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates for lines to be considered orthogonal. Default is 1.
+    Parameters: points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
+    center_y], label]. pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates for
+    lines to be considered orthogonal. Default is 1.
 
     Returns:
         list: A list of pairs of orthogonal lines, each defined by two points [point1, point2].
@@ -243,14 +239,12 @@ def find_missing_points(points, period_x, period_y, pixel_tolerance=1):
     """
     Find missing points on the axis based on the given points, center periods, and label periods.
 
-    Parameters:
-        points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
-        period_x (int): The center period of the X-axis.
-        period_y (int): The center period of the Y-axis.
-        pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates. Default is 1.
+    Parameters: points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
+    center_y], label]. period_x (int): The center period of the X-axis. period_y (int): The center period of the
+    Y-axis. pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates. Default is 1.
 
-    Returns:
-        list: A list of missing points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
+    Returns: list: A list of missing points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
+    center_y], label].
     """
     missing_points = []
     lines = find_orthogonal_lines(points, pixel_tolerance)
@@ -303,9 +297,9 @@ def separate_lines(points, pixel_tolerance=1):
     """
     Separate points into X and Y parallel lines.
 
-    Parameters:
-        points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
-        pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates. Default is 1.
+    Parameters: points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
+    center_y], label]. pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates.
+    Default is 1.
 
     Returns:
         tuple: Two lists of points separated by X and Y parallel lines.
@@ -330,12 +324,12 @@ def find_actual_points(points, pixel_tolerance=1):
     """
     Find the actual points (intersections) on the X and Y axes.
 
-    Parameters:
-        points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
-        pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates. Default is 1.
+    Parameters: points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
+    center_y], label]. pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates.
+    Default is 1.
 
-    Returns:
-        tuple: Two lists of actual points (intersections) on the X and Y axes, each point in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
+    Returns: tuple: Two lists of actual points (intersections) on the X and Y axes, each point in the format [[[x1,
+    y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
     """
     x_parallel_line, y_parallel_line = separate_lines(points, pixel_tolerance)
     lines_x = sorted(x_parallel_line, key=lambda point: point[2])
@@ -372,8 +366,8 @@ def find_points(img_path):
     Parameters:
         img_path (str): The path to the scientific figure image.
 
-    Returns:
-        list: A list of actual points (intersections) on the X and Y axes, each point in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
+    Returns: list: A list of actual points (intersections) on the X and Y axes, each point in the format [[[x1, y1],
+    [x2, y2], [x3, y3], [x4, y4]], [center_x, center_y], label].
     """
     points = []
     for lang in [
