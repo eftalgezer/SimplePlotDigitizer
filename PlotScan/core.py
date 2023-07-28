@@ -18,23 +18,13 @@ from .points import find_points
 
 LOGLEVEL = os.environ.get("LOGLEVEL", "INFO").upper()
 logging.basicConfig(level=LOGLEVEL)
-
 ix_, iy_ = 0, 0
 params_: T.Dict[str, T.Any] = {}
-
 args_: T.Optional[T.Any] = None
-
 # NOTE: remember these are cv coordinates and not numpy.
 locations_: T.List[geometry.Point] = []
 points_: T.List[geometry.Point] = []
-
 img_: np.ndarray = np.zeros((1, 1))
-
-
-def cache() -> Path:
-    c = Path(tempfile.gettempdir()) / "plotdigitizer"
-    c.mkdir(parents=True, exist_ok=True)
-    return c
 
 
 def data_to_hash(data) -> str:
