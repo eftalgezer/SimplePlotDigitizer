@@ -43,7 +43,7 @@ def data_to_hash(data) -> str:
 
 
 def list_to_points(points) -> T.List[geometry.Point]:
-    return [point for point in points]
+    return [geometry.Point.fromCSV(point) for point in points]
 
 
 def axis_transformation(p, P: T.List[geometry.Point]):
