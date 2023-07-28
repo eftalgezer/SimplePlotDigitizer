@@ -26,6 +26,33 @@ points_: T.List[geometry.Point] = []
 img_: np.ndarray = np.zeros((1, 1))
 
 
+def plot_traj(traj, outfile: Path):
+    global locations_
+    import matplotlib.pyplot as plt
+
+    x, y = zip(*traj)
+    plt.figure()
+    plt.subplot(211)
+
+    for p in locations_:
+        csize = img_.shape[0] // 40
+        cv.circle(img_, (p.x, img_.shape[0] - p.y), csize, 128, -1)
+
+    plt.imshow(img_, interpolation="none", cmap="gray")
+    plt.axis(False)
+    plt.title("Original")
+    plt.subplot(212)
+    plt.title("Reconstructed")
+    plt.plot(x, y)
+    plt.tight_layout()
+    if not str(outfile):
+        plt.show()
+    else:
+        plt.savefig(outfile)
+        logging.info(f"Saved to {outfile}")
+    plt.close()
+
+
 def data_to_hash(data) -> str:
     return hashlib.sha1(data).hexdigest()
 
