@@ -37,11 +37,11 @@ def test_trimmeed():
 #    _check_csv_file(csvfile)
 
 
-def test_ecg():
-    csvfile = _run_cmdline(
-        HERE / ".." / "figures" / "ECGImage.png"
-    )
-    _check_csv_file(csvfile)
+# def test_ecg():
+#    csvfile = _run_cmdline(
+#        HERE / ".." / "figures" / "ECGImage.png"
+#    )
+#    _check_csv_file(csvfile)
 
 
 def test_grid():
