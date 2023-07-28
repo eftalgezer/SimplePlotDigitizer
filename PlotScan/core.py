@@ -15,6 +15,7 @@ from paddleocr import PaddleOCR
 from PlotScan import grid
 from PlotScan import geometry
 from .trajectory import find_trajectory, normalize
+from .points import find_points
 
 LOGLEVEL = os.environ.get("LOGLEVEL", "INFO").upper()
 logging.basicConfig(level=LOGLEVEL)
@@ -141,18 +142,6 @@ def process_image(img):
     return traj
 
 
-def find_points(img_path):
-    points = []
-    for lang in ['ch', 'en', 'korean', 'japan', 'chinese_cht', 'ta', 'te', 'ka', 'latin', 'arabic', 'cyrillic', 'devanagari']:
-        ocr = PaddleOCR(use_angle_cls=True, lang=lang)
-        img_path = "/home/egezer/Downloads/trimmed.png"
-        result = ocr.ocr(img_path, cls=True)
-        for r in result[0]:
-            if r[1][0].isnumeric() and r[1][1]>=0.70 and [r[0], r[1][0]] not in points:
-                points.append([r[0], r[1][0]])
-    points.sort()
-
-
 def run(args):
     global locations_, points_
     global img_, args_
@@ -179,9 +168,9 @@ def run(args):
     logging.debug(" {img_.min()=} {img_.max()=}")
     assert img_.max() <= 255
     assert img_.min() < img_.mean() < img_.max(), "Could not read meaningful data"
-
-    #points_ = list_to_points(args.data_point)
-    #locations_ = list_to_points(args.location)
+    points = find_points(img_path)
+    points_ = list_to_points([point[1] for point in points])
+    #locations_ = list_to_points([point[0] for point in points])
     #logging.debug(f"data points {args.data_point} → location on image {args.location}")
 
     traj = process_image(img_)
