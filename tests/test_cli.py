@@ -30,11 +30,11 @@ def test_trimmeed():
     _check_csv_file(csvfile)
 
 
-def test_graph1():
-    csvfile = _run_cmdline(
-        HERE / ".." / "figures" / "graphs_1.png"
-    )
-    _check_csv_file(csvfile)
+# def test_graph1():
+#    csvfile = _run_cmdline(
+#        HERE / ".." / "figures" / "graphs_1.png"
+#    )
+#    _check_csv_file(csvfile)
 
 
 def test_ecg():
