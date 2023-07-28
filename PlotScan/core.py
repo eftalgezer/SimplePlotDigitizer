@@ -43,7 +43,7 @@ def data_to_hash(data) -> str:
 
 
 def list_to_points(points) -> T.List[geometry.Point]:
-    return [geometry.Point.fromCSV(x) for x in points]
+    return [point for point in points]
 
 
 def axis_transformation(p, P: T.List[geometry.Point]):
@@ -169,8 +169,8 @@ def run(args):
     assert img_.max() <= 255
     assert img_.min() < img_.mean() < img_.max(), "Could not read meaningful data"
     points = find_points(infile)
-    points_ = list_to_points(str([point[1] for point in points]).replace("[", "").replace("]", ""))
-    locations_ = list_to_points(str([point[0] for point in points]).replace("[", "").replace("]", ""))
+    points_ = list_to_points([point[1] for point in points])
+    locations_ = list_to_points([point[0] for point in points])
     #logging.debug(f"data points {args.data_point} → location on image {args.location}")
 
     traj = process_image(img_)
