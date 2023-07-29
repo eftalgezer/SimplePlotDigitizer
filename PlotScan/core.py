@@ -27,6 +27,16 @@ img_: np.ndarray = np.zeros((1, 1))
 
 
 def plot_traj(traj, outfile: Path):
+    """
+    Plot the trajectory and save the plot to a file.
+
+    Parameters:
+        traj (list): The trajectory to be plotted in the format [(x1, y1), (x2, y2), ...].
+        outfile (Path): The path to save the plot.
+
+    Returns:
+        None.
+    """
     global locations_
     import matplotlib.pyplot as plt
 
@@ -54,16 +64,42 @@ def plot_traj(traj, outfile: Path):
 
 
 def data_to_hash(data) -> str:
+    """
+    Convert data to its SHA1 hash.
+
+    Parameters:
+        data: The data to be hashed.
+
+    Returns:
+        str: The SHA1 hash of the data.
+    """
     return hashlib.sha1(data).hexdigest()
 
 
 def list_to_points(points) -> T.List[geometry.Point]:
+    """
+    Convert a list of points to a list of geometry.Point objects.
+
+    Parameters:
+        points (list): List of points in the format [(x1, y1), (x2, y2), ...].
+
+    Returns:
+        list: A list of geometry.Point objects.
+    """
     return [geometry.Point.convert(point) for point in points]
 
 
 def axis_transformation(p, P: T.List[geometry.Point]):
-    """Compute m and offset for model Y = m X + offset that is used to transform
-    axis X to Y"""
+    """
+    Compute the transformation parameters (slope and offset) to transform one axis (X) to another (Y).
+
+    Parameters:
+        p (list): The list of points on axis X in the format [(x1, y1), (x2, y2), ...].
+        P (list): The list of points on axis Y in the format [(x1, y1), (x2, y2), ...].
+
+    Returns:
+        tuple: Two tuples containing the slope (sX, sY) and offset (offX, offY) for the X and Y axes.
+    """
     # Currently only linear maps and only 2D.
     px, py = zip(*p)
     Px, Py = zip(*P)
@@ -73,6 +109,16 @@ def axis_transformation(p, P: T.List[geometry.Point]):
 
 
 def transform_axis(img, erase_near_axis: int = 0):
+    """
+    Transform the axis of the image.
+
+    Parameters:
+        img (numpy.ndarray): The image to be transformed.
+        erase_near_axis (int, optional): The number of extra rows and columns to erase near the axis. Default is 0.
+
+    Returns:
+        tuple: Two tuples containing the slope (sX, sY) and offset (offX, offY) for the transformed X and Y axes.
+    """
     global locations_
     global points_
     # extra: extra rows and cols to erase. Help in containing error near axis.
@@ -90,6 +136,17 @@ def transform_axis(img, erase_near_axis: int = 0):
 def _find_trajectory_colors(
         img: np.ndarray, plot: bool = False
 ) -> T.Tuple[int, T.List[int]]:
+    """
+    Find the colors corresponding to the trajectories in the image.
+
+    Parameters:
+        img (numpy.ndarray): The image.
+        plot (bool, optional): Whether to plot the histogram. Default is False.
+
+    Returns:
+        tuple: The background color and a list of trajectory colors.
+    """
+
     # Each trajectory color x is bounded in the range x-3 to x+2 (interval of
     # 5) -> total 51 bins. Also, it is very unlikely that colors which are too
     # close to each other are part of different trajecotries. It is safe to
@@ -129,7 +186,15 @@ def _find_trajectory_colors(
 
 
 def compute_foregrond_background_stats(img) -> T.Dict[str, float]:
-    """Compute foreground and background color."""
+    """
+    Compute the foreground and background colors of the image.
+
+    Parameters:
+        img (numpy.ndarray): The image.
+
+    Returns:
+        dict: A dictionary containing the computed foreground and background colors.
+    """
     params: T.Dict[str, T.Any] = {}
     # Compute the histogram. It should be a multimodal histogram. Find peaks
     # and these are the colors of background and foregorunds. Currently,
@@ -142,6 +207,15 @@ def compute_foregrond_background_stats(img) -> T.Dict[str, float]:
 
 
 def process_image(img):
+    """
+    Process the image to extract trajectories.
+
+    Parameters:
+        img (numpy.ndarray): The image.
+
+    Returns:
+        list: The extracted trajectory in the format [(x1, y1), (x2, y2), ...].
+    """
     global params_
     global args_
     params_ = compute_foregrond_background_stats(img)
@@ -158,6 +232,15 @@ def process_image(img):
 
 
 def run(args):
+    """
+    Main function to run the trajectory extraction process.
+
+    Parameters:
+        args: Command-line arguments.
+
+    Returns:
+        None.
+    """
     global locations_, points_
     global img_, args_
     args_ = args
