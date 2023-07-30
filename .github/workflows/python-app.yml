@@ -74,6 +74,9 @@ jobs:
       with:
         project-token: ${{ secrets.codacy_token }}
         coverage-reports: /home/runner/work/PlotScan/PlotScan/coverage.xml
+        run: |
+            bash <(curl -Ls https://coverage.codacy.com/get.sh) report \
+            -l PHP $(find . -name 'coverage.xml' -printf '-r %p ')
     - name: See coverage
       run: |
           cd /home/runner/work/PlotScan/PlotScan/
