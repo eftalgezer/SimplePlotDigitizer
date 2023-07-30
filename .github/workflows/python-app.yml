@@ -70,11 +70,13 @@ jobs:
         files: /home/runner/work/PlotScan/PlotScan/coverage.xml
         flags: tests
     - name: Upload testing report to Codacy
-      env:
+      uses: codacy/codacy-coverage-reporter-action@v1
+      with:
         project-token: ${{ secrets.codacy_token }}
-      run: |
-          bash <(curl -Ls https://coverage.codacy.com/get.sh) report \
-          -l PHP $(find . -name 'coverage.xml' -printf '-r %p ')
+        coverage-reports: /home/runner/work/PlotScan/PlotScan/coverage.xml
+        run: |
+            bash <(curl -Ls https://coverage.codacy.com/get.sh) report \
+            -l PHP $(find . -name 'coverage.xml' -printf '-r %p ')
     - name: See coverage
       run: |
           cd /home/runner/work/PlotScan/PlotScan/
