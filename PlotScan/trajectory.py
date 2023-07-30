@@ -1,17 +1,19 @@
 """
 Module for finding and processing trajectories in an image.
 
-This module provides functions to find and process trajectories in an image. Trajectories are sequences of points that represent data curves in a plot or graph.
+This module provides functions to find and process trajectories in an image. Trajectories are sequences of points
+that represent data curves in a plot or graph.
 
 Functions:
     normalize(img: np.ndarray) -> np.ndarray:
         Normalize the pixel values of the image to a range between 0 and 255.
 
-    fit_trajectory_using_median(traj: Dict[int, List[int]], T: Tuple[Tuple[float, float], Tuple[float, float]], img: np.ndarray) -> List[Tuple[float, float]]:
-        Fit the trajectory points to the Y = mX + offset model using the median method.
+    fit_trajectory_using_median(traj: Dict[int, List[int]], T: Tuple[Tuple[float, float], Tuple[float, float]],
+    img: np.ndarray) -> List[Tuple[float, float]]: Fit the trajectory points to the Y = mX + offset model using the
+    median method.
 
-    find_trajectory(img: np.ndarray, pixel: int, T: Tuple[Tuple[float, float], Tuple[float, float]]) -> Tuple[List[Tuple[float, float]], np.ndarray]:
-        Find the trajectory points of the specified pixel color in the image.
+    find_trajectory(img: np.ndarray, pixel: int, T: Tuple[Tuple[float, float], Tuple[float, float]]) -> Tuple[List[
+    Tuple[float, float]], np.ndarray]: Find the trajectory points of the specified pixel color in the image.
 
     _valid_px(val: int) -> int:
         Ensure that a pixel value is within the valid range of 0 to 255.
@@ -78,13 +80,13 @@ def fit_trajectory_using_median(traj, T, img):
     """
     Fit the trajectory points to the Y = mX + offset model using the median method.
 
-    Parameters:
-        traj (Dict[int, List[int]]): A dictionary containing x-coordinate (int) as keys and corresponding list of y-coordinates (List[int]) as values, representing the trajectory points in the image.
-        T (Tuple[Tuple[float, float], Tuple[float, float]]): A tuple of two tuples, each containing scaling factors (float) and offsets (float) for X and Y axes, respectively.
-        img (np.ndarray): The input image as a NumPy array.
+    Parameters: traj (Dict[int, List[int]]): A dictionary containing x-coordinate (int) as keys and corresponding
+    list of y-coordinates (List[int]) as values, representing the trajectory points in the image. T (Tuple[Tuple[
+    float, float], Tuple[float, float]]): A tuple of two tuples, each containing scaling factors (float) and offsets
+    (float) for X and Y axes, respectively. img (np.ndarray): The input image as a NumPy array.
 
-    Returns:
-        List[Tuple[float, float]]: A list of tuples, each containing the fitted data points of the trajectory in data coordinates (X, Y).
+    Returns: List[Tuple[float, float]]: A list of tuples, each containing the fitted data points of the trajectory in
+    data coordinates (X, Y).
     """
     (sX, sY), (offX, offY) = T
     res = []
@@ -138,10 +140,9 @@ def find_trajectory(img: np.ndarray, pixel: int, T):
     """
     Find the trajectory points of the specified pixel color in the image.
 
-    Parameters:
-        img (np.ndarray): The input image as a NumPy array.
-        pixel (int): The pixel color to find the trajectory for in the image.
-        T (Tuple[Tuple[float, float], Tuple[float, float]]): A tuple of two tuples, each containing scaling factors (float) and offsets (float) for X and Y axes, respectively.
+    Parameters: img (np.ndarray): The input image as a NumPy array. pixel (int): The pixel color to find the
+    trajectory for in the image. T (Tuple[Tuple[float, float], Tuple[float, float]]): A tuple of two tuples,
+    each containing scaling factors (float) and offsets (float) for X and Y axes, respectively.
 
     Returns:
         Tuple[List[Tuple[float, float]], np.ndarray]: A tuple containing:

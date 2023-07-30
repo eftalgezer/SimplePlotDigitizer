@@ -1,7 +1,9 @@
 """
 Test package for testing the functionalities of the main module.
 
-This package contains test modules to validate the functionalities of the main module, which includes functions for digitizing a scientific plot, removing grid lines from an image, and finding trajectories of specific pixel colors in the image.
+This package contains test modules to validate the functionalities of the main module, which includes functions for
+digitizing a scientific plot, removing grid lines from an image, and finding trajectories of specific pixel colors in
+the image.
 
 Modules:
     test_core.py: Contains test cases for the core.py module.
