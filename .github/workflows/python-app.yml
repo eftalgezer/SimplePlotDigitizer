@@ -68,7 +68,6 @@ jobs:
       uses: codecov/codecov-action@v3.1.4
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        directory: ./coverage/reports/
         env_vars: OS,PYTHON
         files: ./coverage.xml
         flags: tests
