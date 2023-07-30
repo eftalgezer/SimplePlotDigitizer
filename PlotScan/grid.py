@@ -1,3 +1,41 @@
+"""
+Grid module for removing grid lines from an image.
+
+This module provides functions to remove grid lines from an image. The `remove_horizontal_grid_simple` function removes
+horizontal grid lines from the image based on the mean and standard deviation of the pixel values in each row. The
+`heal` function performs a morphological operation to heal the image by removing small grid artifacts.
+
+Functions:
+    remove_horizontal_grid_simple(img: np.ndarray) -> np.ndarray:
+        Remove horizontal grid lines from the image based on the mean and standard deviation of pixel values in each row.
+
+    heal(orig: np.ndarray) -> np.ndarray:
+        Perform a morphological operation to heal the image and remove small grid artifacts.
+
+    remove_grid(orig: np.ndarray, num_iter: int = 3, background_color: int = 255, grid_size: int = 2) -> np.ndarray:
+        Remove grid lines from the image using a combination of morphological operations.
+
+    test_remove_grid(imgfile: Path, debug: bool = True):
+        Test function to demonstrate grid removal on an image.
+
+Usage:
+    from .grid import remove_horizontal_grid_simple, heal, remove_grid, test_remove_grid
+
+    # Load the image using OpenCV
+    img = cv.imread("image.png", 0)
+
+    # Remove horizontal grid lines using the simple method
+    without_horizontal_grid = remove_horizontal_grid_simple(img)
+
+    # Heal the image to remove small grid artifacts
+    healed_img = heal(img)
+
+    # Remove grid lines using the morphological operation
+    without_grid = remove_grid(img)
+
+    # Test grid removal on an image and save the results
+    test_remove_grid("image.png", debug=True)
+"""
 from pathlib import Path
 import tempfile
 import cv2 as cv

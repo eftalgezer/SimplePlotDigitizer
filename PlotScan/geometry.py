@@ -1,3 +1,39 @@
+"""
+Geometry module for handling 2D points and computing the origin of given points.
+
+This module provides a Point class to represent 2D points with x and y coordinates. It also includes a function
+`find_origin` to compute the origin of a set of points based on their colinearity.
+
+Classes:
+    Point: A class representing 2D points with x and y coordinates.
+
+Functions:
+    find_origin(pts: List[Point]) -> Point:
+        Compute the origin of given points based on their colinearity.
+
+Usage:
+    from .geometry import Point, find_origin
+
+    # Creating Point objects
+    p1 = Point(10, 20)
+    p2 = Point(30, 40)
+
+    # Converting a coordinate representation to a Point object
+    coords = "50, 60"
+    p3 = Point.convert(coords)  # Result: Point(50, 60)
+
+    # Computing the origin of points
+    points = [Point(10, 20), Point(30, 40), Point(50, 60)]
+    origin = find_origin(points)  # Result: Point(10, 20)
+
+    # Testing the find_origin function
+    test_origin()
+
+Note:
+    - The Point class provides methods for comparison, hashing, and string representation.
+    - The find_origin function finds the colinear points from the given list of points and computes the origin as the
+      average of the vertical and horizontal points.
+"""
 import typing as T
 import statistics
 import math
@@ -5,11 +41,31 @@ import math
 
 class Point:
     def __init__(self, x, y):
+        """
+        Initialize a Point object with x and y coordinates.
+
+        Parameters:
+            x (float): The x-coordinate of the point.
+            y (float): The y-coordinate of the point.
+
+        Returns:
+            None.
+        """
         self.x = int(x)
         self.y = int(y)
 
     @classmethod
     def convert(cls, coords) -> "Point":
+        """
+        Convert a coordinate representation to a Point object.
+
+        Parameters:
+            coords (Union[str, List[float]]): The coordinate representation. It can be a string in the format "x,y"
+                                             or a list of two floats representing (x, y) coordinates.
+
+        Returns:
+            Point: The Point object created from the coordinates.
+        """
         if isinstance(coords, str):
             xy = [float(coord) for coord in coords.split(",")]
         else:
@@ -17,20 +73,55 @@ class Point:
         return cls(xy[0], xy[1])
 
     def __eq__(self, other) -> bool:
+        """
+        Check if two Point objects are equal.
+
+        Parameters:
+            other (Point): The other Point object to compare with.
+
+        Returns:
+            bool: True if the two points are equal, False otherwise.
+        """
         return (self.x == other.x) and (self.y == other.y)
 
     def __hash__(self):
+        """
+        Compute the hash value for the Point object.
+
+        Returns:
+            int: The hash value.
+        """
         return hash((self.x, self.y))
 
     def __repr__(self):
+        """
+        Get a string representation of the Point object.
+
+        Returns:
+            str: A string representation of the Point object in the format "(x, y)".
+        """
         return f"({self.x}, {self.y})"
 
     def __iter__(self):
+        """
+        Return an iterator for the Point object.
+
+        Returns:
+            iterator: An iterator containing the x and y coordinates of the point.
+        """
         return iter((self.x, self.y))
 
 
 def find_origin(pts: T.List[Point]) -> Point:
-    """Compute origin of given points."""
+    """
+    Compute the origin of given points.
+
+    Parameters:
+        pts (List[Point]): A list of Point objects representing the points.
+
+    Returns:
+        Point: The Point object representing the origin.
+    """
     horizontal = set()
     for i, p1 in enumerate(pts):
         for p2 in pts[i + 1:]:
@@ -51,6 +142,12 @@ def find_origin(pts: T.List[Point]) -> Point:
 
 
 def test_origin():
+    """
+    Test function for the find_origin() function.
+
+    Returns:
+        None.
+    """
     pts = [Point(81, 69), Point(1779, 68), Point(81, 449)]
     p = find_origin(pts)
     assert p == Point(81, 68), p == Point(81, 68)
