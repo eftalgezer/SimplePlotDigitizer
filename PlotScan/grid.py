@@ -7,7 +7,8 @@ horizontal grid lines from the image based on the mean and standard deviation of
 
 Functions:
     remove_horizontal_grid_simple(img: np.ndarray) -> np.ndarray:
-        Remove horizontal grid lines from the image based on the mean and standard deviation of pixel values in each row.
+        Remove horizontal grid lines from the image based on the mean and standard deviation of pixel values in each
+        row.
 
     heal(orig: np.ndarray) -> np.ndarray:
         Perform a morphological operation to heal the image and remove small grid artifacts.
@@ -45,11 +46,27 @@ TEMP = tempfile.gettempdir()
 
 
 def _save_fig(img, outfile):
+    """
+    Save the image to the specified output file.
+
+    Parameters:
+        img (np.ndarray): The image to be saved as a NumPy array representing grayscale image data.
+        outfile (str): The path to the output file where the image will be saved.
+    """
     print(f"Saved to {outfile}")
     cv.imwrite(outfile, img)
 
 
 def remove_horizontal_grid_simple(img) -> np.ndarray:
+    """
+    Remove horizontal grid lines from the image based on the mean and standard deviation of pixel values in each row.
+
+    Parameters:
+        img (np.ndarray): The input image as a NumPy array representing grayscale image data.
+
+    Returns:
+        np.ndarray: The image after removing horizontal grid lines as a NumPy array representing grayscale image data.
+    """
     mu, sigma = img.mean(), img.std()
     for i, row in enumerate(img):
         if row.mean() < mu - sigma:
@@ -59,6 +76,15 @@ def remove_horizontal_grid_simple(img) -> np.ndarray:
 
 
 def heal(orig):
+    """
+    Perform a morphological operation to heal the image and remove small grid artifacts.
+
+    Parameters:
+        orig (np.ndarray): The original image as a NumPy array representing grayscale image data.
+
+    Returns:
+        np.ndarray: The healed image as a NumPy array representing grayscale image data.
+    """
     kernel = np.ones((3, 3), np.uint8)
     return cv.morphologyEx(orig.copy(), cv.MORPH_OPEN, kernel, iterations=2)
 
@@ -66,6 +92,19 @@ def heal(orig):
 def remove_grid(
     orig, num_iter=3, background_color: int = 255, grid_size: int = 2
 ) -> np.ndarray:
+    """
+    Remove grid lines from the image using a combination of morphological operations.
+
+    Parameters:
+        orig (np.ndarray): The original image as a NumPy array representing grayscale image data.
+        num_iter (int, optional): The number of iterations to be used for the morphological operation (default is 3).
+        background_color (int, optional): The color value to be used for the background after removing the grid lines
+                                          (default is 255).
+        grid_size (int, optional): The thickness of grid lines to be removed (default is 2).
+
+    Returns:
+        np.ndarray: The image after removing grid lines as a NumPy array representing grayscale image data.
+    """
     img = orig.copy()
     thres = cv.threshold(img, 0, 255, cv.THRESH_BINARY_INV + cv.THRESH_OTSU)[1]
     # Remove horizontal lines
@@ -91,6 +130,13 @@ def remove_grid(
 
 
 def test_remove_grid(imgfile: Path, debug: bool = True):
+    """
+    Test function to demonstrate grid removal on an image.
+
+    Parameters:
+        imgfile (Path): The path to the input image file.
+        debug (bool, optional): If True, the function will save intermediate results for debugging (default is True).
+    """
     img = cv.imread(str(imgfile), 0)
     if debug:
         _save_fig(img, f"{TEMP}/orig.png")
