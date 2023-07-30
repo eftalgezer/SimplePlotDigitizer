@@ -63,7 +63,6 @@ jobs:
         codecov
     - name: See coverage
       run: |
-          cd /home/runner/work/PlotScan/PlotScan/
           ls
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3.1.4
@@ -71,10 +70,10 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
         directory: ./coverage/reports/
         env_vars: OS,PYTHON
-        files: /home/runner/work/PlotScan/PlotScan/coverage.xml
+        files: ./coverage.xml
         flags: tests
     - name: Upload testing report to Codacy
       uses: codacy/codacy-coverage-reporter-action@v1
       with:
         project-token: ${{ secrets.codacy_token }}
-        coverage-reports: /home/runner/work/PlotScan/PlotScan/coverage.xml
+        coverage-reports: ./coverage.xml
