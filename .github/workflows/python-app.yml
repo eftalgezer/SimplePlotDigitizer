@@ -71,8 +71,7 @@ jobs:
         env_vars: OS,PYTHON
         files: ./coverage.xml
         flags: tests
-    - name: Upload testing report to Codacy
-      uses: codacy/codacy-coverage-reporter-action@v1
-      with:
-        project-token: ${{ secrets.codacy_token }}
-        coverage-reports: ./coverage.xml
+    - name: "Pushing reports to Codacy"
+      run: |
+            export CODACY_PROJECT_TOKEN=${{CODACY_TOKEN}}
+            wget -qO - https://coverage.codacy.com/get.sh | sh
