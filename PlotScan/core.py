@@ -38,7 +38,6 @@ def plot_traj(traj, outfile: Path):
     """
     import matplotlib.pyplot as plt
 
-    global locations_
     x, y = zip(*traj)
     plt.figure()
     plt.subplot(211)
@@ -103,8 +102,6 @@ def transform_axis(img, erase_near_axis: int = 0):
     Returns:
         tuple: Two tuples containing the slope (sX, sY) and offset (offX, offY) for the transformed X and Y axes.
     """
-    global locations_
-    global points_
     # extra: extra rows and cols to erase. Help in containing error near axis.
     # compute the transformation between old and new axis.
     T = axis_transformation(points_, locations_)
@@ -200,7 +197,6 @@ def process_image(img):
     Returns:
         list: The extracted trajectory in the format [(x1, y1), (x2, y2), ...].
     """
-    global params_
     params_ = compute_foregrond_background_stats(img)
 
     T = transform_axis(img, erase_near_axis=3)
@@ -224,7 +220,6 @@ def run(args):
     Returns:
         None.
     """
-    global locations_, points_
     global img_, args_
     args_ = args
 
