@@ -37,17 +37,15 @@ def plot_traj(traj, outfile: Path):
     Returns:
         None.
     """
-    global locations_
     import matplotlib.pyplot as plt
 
+    global locations_
     x, y = zip(*traj)
     plt.figure()
     plt.subplot(211)
-
     for p in locations_:
         csize = img_.shape[0] // 40
         cv.circle(img_, (p.x, img_.shape[0] - p.y), csize, 128, -1)
-
     plt.imshow(img_, interpolation="none", cmap="gray")
     plt.axis(False)
     plt.title("Original")
