@@ -74,6 +74,4 @@ jobs:
     - name: "Pushing reports to Codacy"
       run: |
             export CODACY_PROJECT_TOKEN=${{secrets.CODACY_TOKEN}}
-            LATEST_VERSION="$(curl -Ls https://artifacts.codacy.com/bin/codacy-coverage-reporter/latest)"
-            curl -Ls -o codacy-coverage-reporter-assembly.jar "https://artifacts.codacy.com/bin/codacy-coverage-reporter/${LATEST_VERSION}/codacy-coverage-reporter-assembly.jar"
-            java -jar codacy-coverage-reporter-assembly.jar report
+            bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage.xml
