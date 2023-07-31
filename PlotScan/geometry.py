@@ -40,6 +40,32 @@ import math
 
 
 class Point:
+    """
+    Represents a 2D point with x and y coordinates.
+
+    Attributes:
+        x (int): The x-coordinate of the point.
+        y (int): The y-coordinate of the point.
+
+    Methods:
+        __init__(self, x: int, y: int):
+            Initializes a Point object with the given x and y coordinates.
+
+        convert(cls, coords) -> Point:
+            Converts a coordinate representation to a Point object.
+
+        __eq__(self, other) -> bool:
+            Checks if two Point objects are equal.
+
+        __hash__(self):
+            Computes the hash value for the Point object.
+
+        __repr__(self) -> str:
+            Returns a string representation of the Point object.
+
+        __iter__(self) -> iterator:
+            Returns an iterator for the Point object containing x and y coordinates.
+    """
     def __init__(self, x, y):
         """
         Initialize a Point object with x and y coordinates.

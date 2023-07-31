@@ -379,8 +379,8 @@ def find_points(img_path):
     ]:
         ocr = PaddleOCR(use_angle_cls=True, lang=lang)
         result = ocr.ocr(str(img_path), cls=True)
-        for r in result:
-            points.extend([line[0], None, float(line[1][0])] for line in r if line[1][0].isnumeric())
+        for result in result:
+            points.extend([line[0], None, float(line[1][0])] for line in result if line[1][0].isnumeric())
     points = sorted(points, key=lambda rect: rect[0][0][0])
     points = remove_overlapping_rectangles(remove_duplicate_rectangles(points))
     for point in points:

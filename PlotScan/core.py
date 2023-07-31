@@ -217,7 +217,6 @@ def process_image(img):
         list: The extracted trajectory in the format [(x1, y1), (x2, y2), ...].
     """
     global params_
-    global args_
     params_ = compute_foregrond_background_stats(img)
 
     T = transform_axis(img, erase_near_axis=3)
