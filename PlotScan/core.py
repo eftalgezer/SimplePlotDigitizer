@@ -4,7 +4,6 @@ Module bundling all functions needed to digitise a scientific plot
 import sys
 import os
 import typing as T
-import hashlib
 from pathlib import Path
 import logging
 import numpy as np
@@ -43,9 +42,9 @@ def plot_traj(traj, outfile: Path):
     x, y = zip(*traj)
     plt.figure()
     plt.subplot(211)
-    for p in locations_:
+    for location in locations_:
         csize = img_.shape[0] // 40
-        cv.circle(img_, (p.x, img_.shape[0] - p.y), csize, 128, -1)
+        cv.circle(img_, (location.x, img_.shape[0] - location.y), csize, 128, -1)
     plt.imshow(img_, interpolation="none", cmap="gray")
     plt.axis(False)
     plt.title("Original")
@@ -266,7 +265,7 @@ def run(args):
     if args_.plot:
         plot_traj(traj, args_.plot)
     outfile = args.output or f"{args.INPUT}.traj.csv"
-    with open(outfile, "w") as f:
+    with open(outfile, "w", encoding="utf-8") as f:
         for r in traj:
             f.write("%g %g\n" % r)
     logging.info(f"Wrote trajectory to {outfile}")
