@@ -61,19 +61,6 @@ def plot_traj(traj, outfile: Path):
     plt.close()
 
 
-def data_to_hash(data) -> str:
-    """
-    Convert data to its SHA1 hash.
-
-    Parameters:
-        data: The data to be hashed.
-
-    Returns:
-        str: The SHA1 hash of the data.
-    """
-    return hashlib.sha1(data).hexdigest()
-
-
 def list_to_points(points) -> T.List[geometry.Point]:
     """
     Convert a list of points to a list of geometry.Point objects.
