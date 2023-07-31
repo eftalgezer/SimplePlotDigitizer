@@ -74,12 +74,11 @@ jobs:
     - name: Pushing reports to Codacy (Windows)
       if: matrix.os == 'windows-latest'
       run: |
-            export CODACY_PROJECT_TOKEN=${{secrets.CODACY_TOKEN}}
             git clone https://github.com/codacy/codacy-coverage-reporter.git
             cd codacy-coverage-reporter
             sbt assembly
             $jar = Convert-Path ../codacy-coverage-reporter/target/codacy-coverage-reporter-assembly-*.jar
-            java -jar $jar report -r coverage.xml
+            java -jar $jar report -r coverage.xml --project-token ${{secrets.CODACY_TOKEN}}
     - name: Pushing reports to Codacy (others)
       if: matrix.os != 'windows-latest'
       run: |
