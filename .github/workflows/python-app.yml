@@ -73,5 +73,5 @@ jobs:
         flags: tests
     - name: "Pushing reports to Codacy"
       run: |
-            export CODACY_PROJECT_TOKEN=${{CODACY_TOKEN}}
+            export CODACY_PROJECT_TOKEN=${{secrets.CODACY_TOKEN}}
             wget -qO - https://coverage.codacy.com/get.sh | sh
