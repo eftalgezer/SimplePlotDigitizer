@@ -72,6 +72,7 @@ jobs:
         files: ./coverage.xml
         flags: tests
     - name: Upload testing report to Codacy
-      run: |
-          curl -LS -o codacy-coverage-reporter-assembly.jar "$(curl -LSs https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | endswith(".jar"))) | .[0].browser_download_url')" -H "project-token: ${{ secrets.codacy_token }}"
-          java -jar codacy-coverage-reporter-assembly.jar report
+      uses: codacy/codacy-coverage-reporter-action@v1
+      with:
+        project-token: ${{ secrets.codacy_token }}
+        coverage-reports: ./coverage.xml
