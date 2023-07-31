@@ -38,6 +38,7 @@ def plot_traj(traj, outfile: Path):
     """
     import matplotlib.pyplot as plt
 
+    global locations_
     x, y = zip(*traj)
     plt.figure()
     plt.subplot(211)
@@ -102,6 +103,8 @@ def transform_axis(img, erase_near_axis: int = 0):
     Returns:
         tuple: Two tuples containing the slope (sX, sY) and offset (offX, offY) for the transformed X and Y axes.
     """
+    global locations_
+    global points_
     # extra: extra rows and cols to erase. Help in containing error near axis.
     # compute the transformation between old and new axis.
     T = axis_transformation(points_, locations_)
@@ -197,7 +200,8 @@ def process_image(img):
     Returns:
         list: The extracted trajectory in the format [(x1, y1), (x2, y2), ...].
     """
-    global params_ = compute_foregrond_background_stats(img)
+    global params_
+    params_ = compute_foregrond_background_stats(img)
 
     T = transform_axis(img, erase_near_axis=3)
     assert img.std() > 0.0, "No data in the image!"
@@ -220,39 +224,41 @@ def run(args):
     Returns:
         None.
     """
-    global args_ = args
+    global locations_, points_
+    global img_, args_
+    args_ = args
 
     infile = Path(args.INPUT)
     assert infile.exists(), f"{infile} does not exists."
     logging.info(f"Extracting trajectories from {infile}")
 
     # reads into gray-scale.
-    global img_ = cv.imread(str(infile), 0)
-    global img_ = normalize(img_)
+    img_ = cv.imread(str(infile), 0)
+    img_ = normalize(img_)
 
     # erosion after dilation (closes gaps)
     if args_.preprocess:
         kernel = np.ones((1, 1), np.uint8)
-        global img_ = cv.morphologyEx(img_, cv.MORPH_CLOSE, kernel)
+        img_ = cv.morphologyEx(img_, cv.MORPH_CLOSE, kernel)
 
     # remove grids.
-    global img_ = grid.remove_grid(img_)
+    img_ = grid.remove_grid(img_)
 
     # rescale it again.
-    global img_ = normalize(img_)
+    img_ = normalize(img_)
     logging.debug(" {img_.min()=} {img_.max()=}")
     assert img_.max() <= 255
     assert img_.min() < img_.mean() < img_.max(), "Could not read meaningful data"
     if args.data_point:
-        global points_ = list_to_points(args.data_point)
+        points_ = list_to_points(args.data_point)
     else:
         points = find_points(infile)
-        global points_ = list_to_points([point[1] for point in points])
+        points_ = list_to_points([point[1] for point in points])
     if args.location:
-        global locations_ = list_to_points(args.location)
+        locations_ = list_to_points(args.location)
     else:
         points = find_points(infile)
-        global locations_ = list_to_points([point[0] for point in points])
+        locations_ = list_to_points([point[0] for point in points])
     # logging.debug(f"data points {args.data_point} → location on image {args.location}")
 
     traj = process_image(img_)
