@@ -197,7 +197,7 @@ def process_image(img):
     Returns:
         list: The extracted trajectory in the format [(x1, y1), (x2, y2), ...].
     """
-    params_ = compute_foregrond_background_stats(img)
+    global params_ = compute_foregrond_background_stats(img)
 
     T = transform_axis(img, erase_near_axis=3)
     assert img.std() > 0.0, "No data in the image!"
@@ -220,40 +220,39 @@ def run(args):
     Returns:
         None.
     """
-    global img_, args_
-    args_ = args
+    global args_ = args
 
     infile = Path(args.INPUT)
     assert infile.exists(), f"{infile} does not exists."
     logging.info(f"Extracting trajectories from {infile}")
 
     # reads into gray-scale.
-    img_ = cv.imread(str(infile), 0)
-    img_ = normalize(img_)
+    global img_ = cv.imread(str(infile), 0)
+    global img_ = normalize(img_)
 
     # erosion after dilation (closes gaps)
     if args_.preprocess:
         kernel = np.ones((1, 1), np.uint8)
-        img_ = cv.morphologyEx(img_, cv.MORPH_CLOSE, kernel)
+        global img_ = cv.morphologyEx(img_, cv.MORPH_CLOSE, kernel)
 
     # remove grids.
-    img_ = grid.remove_grid(img_)
+    global img_ = grid.remove_grid(img_)
 
     # rescale it again.
-    img_ = normalize(img_)
+    global img_ = normalize(img_)
     logging.debug(" {img_.min()=} {img_.max()=}")
     assert img_.max() <= 255
     assert img_.min() < img_.mean() < img_.max(), "Could not read meaningful data"
     if args.data_point:
-        points_ = list_to_points(args.data_point)
+        global points_ = list_to_points(args.data_point)
     else:
         points = find_points(infile)
-        points_ = list_to_points([point[1] for point in points])
+        global points_ = list_to_points([point[1] for point in points])
     if args.location:
-        locations_ = list_to_points(args.location)
+        global locations_ = list_to_points(args.location)
     else:
         points = find_points(infile)
-        locations_ = list_to_points([point[0] for point in points])
+        global locations_ = list_to_points([point[0] for point in points])
     # logging.debug(f"data points {args.data_point} → location on image {args.location}")
 
     traj = process_image(img_)
