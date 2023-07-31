@@ -265,7 +265,7 @@ def run(args):
     if args_.plot:
         plot_traj(traj, args_.plot)
     outfile = args.output or f"{args.INPUT}.traj.csv"
-    with open(outfile, "w", encoding="utf-8") as f:
+    with open(outfile, "w", encoding="utf-8") as file:
         for r in traj:
-            f.write("%g %g\n" % r)
+            file.write("%g %g\n" % r)
     logging.info(f"Wrote trajectory to {outfile}")
