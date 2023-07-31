@@ -74,7 +74,7 @@ jobs:
     - name: Pushing reports to Codacy (Windows)
       if: matrix.os == 'windows-latest'
       run: |
-            set CODACY_PROJECT_TOKEN=${{secrets.CODACY_TOKEN}}
+            export CODACY_PROJECT_TOKEN=${{secrets.CODACY_TOKEN}}
             git clone https://github.com/codacy/codacy-coverage-reporter.git
             cd codacy-coverage-reporter
             sbt assembly
