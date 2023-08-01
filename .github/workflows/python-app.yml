@@ -43,7 +43,7 @@ jobs:
     - name: Install PyMuPDF on Windows
       if: matrix.os == 'windows-latest'
       run: |
-            set PYMUPDF_SETUP_DEVENV = "C:\Program Files (x86)\Microsoft Visual Studio 2019\Common7\IDE\devenv.exe"
+            set PYMUPDF_SETUP_DEVENV = "C:\BuildTools\Common7\IDE\devenv.exe"
             Invoke-WebRequest -Uri 'http://prdownloads.sourceforge.net/swig/swig-4.1.1.tar.gz' -OutFile 'swig-4.1.1.tar.gz'
             tar -xvzf swig-4.1.1.tar.gz -C .
             cd PyMuPDF
