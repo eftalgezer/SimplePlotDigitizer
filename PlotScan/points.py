@@ -359,7 +359,7 @@ def find_actual_points(points, pixel_tolerance=1):
     return actual_points_x, actual_points_y
 
 
-def find_points(img_path):
+def find_points(img_path, pixel_tolerance=1):
     """
     Find the actual points (intersections) on the X and Y axes in a scientific figure image.
 
@@ -393,8 +393,8 @@ def find_points(img_path):
         points[points.index(point)][1] = [center_x, center_y]
     center_period_x = find_center_period(points, axis=0) * 2
     center_period_y = find_center_period(points, axis=1) * 2
-    missing_points = find_missing_points(points, center_period_x, center_period_y, pixel_tolerance=1)
+    missing_points = find_missing_points(points, center_period_x, center_period_y, pixel_tolerance)
     points.extend(missing_points)
     points = sorted(points, key=lambda rect: rect[0][0][0])
-    actual_points_x, actual_points_y = find_actual_points(points, pixel_tolerance=1)
+    actual_points_x, actual_points_y = find_actual_points(points, pixel_tolerance)
     return [actual_points_x[0], actual_points_x[1], actual_points_y[1]]
