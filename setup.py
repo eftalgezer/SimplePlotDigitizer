@@ -44,8 +44,8 @@ setup(
         "opencv-python",
         "numpy",
         "matplotlib",
-        "paddlepaddle==2.6.1.3",
-        "paddleocr"
+        "paddlepaddle",
+        "paddleocr==2.6.1.3"
     ],
     project_urls={
         "Bug Reports": "https://github.com/eftalgezer/PlotScan/issues",
