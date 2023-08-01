@@ -31,8 +31,8 @@ jobs:
     - name: Install Visual Studio for Windows
       if: matrix.os == 'windows-latest'
       run: |
-            curl https://aka.ms/vs/17/release/vs_community.exe --output vs_community.exe
-            ./vs_community.exe
+            curl https://aka.ms/vs/17/release/vs_buildtools.exe --output vs_buildtools.exe
+            ./vs_buildtools.exe
     - name: Install dependencies
       run: |
         pip install setuptools --upgrade
