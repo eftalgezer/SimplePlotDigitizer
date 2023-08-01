@@ -44,7 +44,7 @@ setup(
         "opencv-python",
         "numpy",
         "matplotlib",
-        "paddlepaddle",
+        "paddlepaddle==2.6.1.3",
         "paddleocr"
     ],
     project_urls={
