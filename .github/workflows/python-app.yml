@@ -34,9 +34,15 @@ jobs:
     - name: Install PyMuPDF on Windows
       if: matrix.os == 'windows-latest'
       run: |
-            for (/r "usebackq tokens=1* delims=: " %%i) in (`vswhere.exe -latest -requires Microsoft.VisualStudio.Workload.NativeDesktop`) do (
-              if /i "%%i"=="installationPath" set PYMUPDF_SETUP_DEVENV=%%j
-            )
+            [bool] $vsSetupExists = $null -ne (Get-Command Get-VSSetupInstance -ErrorAction SilentlyContinue)
+            if (!$vsSetupExists)
+            {
+              Write-Verbose "Installing the VSSetup module..."
+              Install-Module VSSetup -Scope CurrentUser -Force
+            }
+            [string] $visualStudioInstallationPath = (Get-VSSetupInstance | Select-VSSetupInstance -Latest -Require Microsoft.Component.MSBuild).InstallationPath
+            $devEnvExecutableFilePath = (Get-ChildItem $visualStudioInstallationPath -Recurse -Filter "DevEnv.exe" | Select-Object -First 1).FullName
+            PYMUPDF_SETUP_DEVENV = $devEnvExecutableFilePath
             Invoke-WebRequest -Uri 'http://prdownloads.sourceforge.net/swig/swig-4.1.1.tar.gz' -OutFile 'swig-4.1.1.tar.gz'
             tar -xvzf swig-4.1.1.tar.gz -C .
             cd PyMuPDF
