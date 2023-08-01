@@ -16,14 +16,11 @@ def are_rectangles_equal(rect1, rect2, pixel_tolerance=1):
     Returns:
         bool: True if the rectangles are equal within the pixel_tolerance, False otherwise.
     """
-    corners1 = rect1[0]
-    corners2 = rect2[0]
-    if len(corners1) != len(corners2):
+    if len(rect1[0]) != len(rect2[0]):
         return False
-    for i in range(len(corners1)):
-        x1, y1 = corners1[i]
-        x2, y2 = corners2[i]
-
+    for i in range(len(rect1[0])):
+        x1, y1 = rect1[0][i]
+        x2, y2 = rect2[0][i]
         if abs(x1 - x2) > pixel_tolerance or abs(y1 - y2) > pixel_tolerance:
             return False
     return True
@@ -209,7 +206,7 @@ def separate_lines(points, pixel_tolerance=1):
                 y_parallel_line.append(points[i])
             if points[i + 1] not in y_parallel_line:
                 y_parallel_line.append(points[i + 1])
-    return x_parallel_line, y_parallel_line
+    return [x_parallel_line, y_parallel_line]
 
 
 def find_actual_points(points, pixel_tolerance=1):
@@ -226,28 +223,15 @@ def find_actual_points(points, pixel_tolerance=1):
     x_parallel_line, y_parallel_line = separate_lines(points, pixel_tolerance)
     lines_x = sorted(x_parallel_line, key=lambda point: point[2])
     lines_y = sorted(y_parallel_line, key=lambda point: point[2])
-    x_zero_point = lines_x[0]
-    y_zero_point = lines_y[0]
-    x1, y1 = x_zero_point[1]
-    x2, y2 = y_zero_point[1]
-    if abs(y1 - y2) <= pixel_tolerance:
+    if abs(lines_x[0][1][1] - lines_y[0][1][1]) <= pixel_tolerance:
         raise ValueError("Lines are parallel")
-    intersection_x = x_zero_point[1][0]
-    intersection_y = y_zero_point[1][1]
-    actual_points_x = [[[intersection_x, intersection_y], [x_zero_point[2], y_zero_point[2]]]]
-    actual_points_y = [[[intersection_x, intersection_y], [x_zero_point[2], y_zero_point[2]]]]
+    actual_points_x = [[[lines_x[0][1][0], lines_y[0][1][1]], [lines_x[0][2], lines_y[0][2]]]]
+    actual_points_y = [[[lines_x[0][1][0], lines_y[0][1][1]], [lines_x[0][2], lines_y[0][2]]]]
     for point in lines_x[1:]:
-        coords = point[1]
-        label = [point[2], y_zero_point[2]]
-        x_projection = coords[0]
-        y_projection = intersection_y
-        actual_points_x.append([[x_projection, y_projection], label])
+        y_projection = lines_y[0][1][1]
+        actual_points_x.append([[point[1][0], y_projection], [point[2], lines_y[0][2]]])
     for point in lines_y[1:]:
-        coords = point[1]
-        label = [x_zero_point[2], point[2]]
-        x_projection = intersection_x
-        y_projection = coords[1]
-        actual_points_y.append([[x_projection, y_projection], label])
+        actual_points_y.append([[lines_x[0][1][0], point[1][1]], [lines_x[0][2], point[2]]])
     return actual_points_x, actual_points_y
 
 
@@ -273,7 +257,6 @@ def find_points(img_path, pixel_tolerance=1):
         result = ocr.ocr(str(img_path), cls=True)
         for res in result:
             points.extend([line[0], None, float(line[1][0])] for line in res if line[1][0].isnumeric())
-    print(points)
     points = sorted(points, key=lambda rect: rect[0][0][0])
     points = remove_overlapping_rectangles(remove_duplicate_rectangles(points))
     for point in points:
@@ -283,8 +266,7 @@ def find_points(img_path, pixel_tolerance=1):
         center_x = int((min(x) + max(x)) / 2)
         center_y = int((min(y) + max(y)) / 2)
         points[points.index(point)][1] = [center_x, center_y]
-    missing_points = find_missing_points(points, pixel_tolerance)
-    points.extend(missing_points)
+    points.extend(find_missing_points(points, pixel_tolerance))
     points = sorted(points, key=lambda rect: rect[0][0][0])
     actual_points_x, actual_points_y = find_actual_points(points, pixel_tolerance)
     return [actual_points_x[0], actual_points_x[1], actual_points_y[1]]
