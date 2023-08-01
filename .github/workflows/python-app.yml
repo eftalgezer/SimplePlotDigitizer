@@ -41,8 +41,7 @@ jobs:
               Install-Module VSSetup -Scope CurrentUser -Force
             }
             [string] $visualStudioInstallationPath = (Get-VSSetupInstance | Select-VSSetupInstance -Latest -Require Microsoft.Component.MSBuild).InstallationPath
-            $devEnvExecutableFilePath = (Get-ChildItem $visualStudioInstallationPath -Recurse -Filter "DevEnv.exe" | Select-Object -First 1).FullName
-            set PYMUPDF_SETUP_DEVENV = $devEnvExecutableFilePath
+            $PYMUPDF_SETUP_DEVENV = (Get-ChildItem $visualStudioInstallationPath -Recurse -Filter "DevEnv.exe" | Select-Object -First 1).FullName
             Invoke-WebRequest -Uri 'http://prdownloads.sourceforge.net/swig/swig-4.1.1.tar.gz' -OutFile 'swig-4.1.1.tar.gz'
             tar -xvzf swig-4.1.1.tar.gz -C .
             cd PyMuPDF
