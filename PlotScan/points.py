@@ -108,50 +108,6 @@ def is_rect_overlapping(rect1, rect2):
     return x1_max >= x2_min and x1_min <= x2_max and y1_max >= y2_min and y1_min <= y2_max
 
 
-def find_intersection(points, pixel_tolerance=1):
-    """
-    Find the intersection point of two orthogonal lines among the given points.
-
-    Parameters: points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
-    center_y], label]. pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates for
-    lines to be considered orthogonal. Default is 1.
-
-    Returns:
-        tuple: The (x, y) coordinates of the intersection point.
-
-    Raises:
-        ValueError: If no intersection point is found.
-    """
-    orthogonal_lines = []
-    for i in range(len(points) - 1):
-        for j in range(i + 1, len(points)):
-            dx = points[i][1][0] - points[j][1][0]
-            dy = points[i][1][1] - points[j][1][1]
-            if abs(dx) <= pixel_tolerance < abs(dy):
-                line = points[i][1], points[j][1]
-                orthogonal_lines.append(line)
-            elif abs(dx) > pixel_tolerance >= abs(dy):
-                line = points[j][1], points[i][1]
-                orthogonal_lines.append(line)
-    for line1 in orthogonal_lines:
-        for line2 in orthogonal_lines:
-            if line1 != line2 and are_lines_orthogonal(line1, line2, angle_tolerance=5):
-                x1, y1 = line1[0]
-                x2, y2 = line1[1]
-                x3, y3 = line2[0]
-                x4, y4 = line2[1]
-                xdiff = x1 - x2, x3 - x4
-                ydiff = y1 - y2, y3 - y4
-                div = xdiff[0] * ydiff[1] - xdiff[1] * ydiff[0]
-                if div == 0:
-                    continue
-                d = x1 * y2 - y1 * x2, x3 * y4 - y3 * x4
-                x = (d[0] * xdiff[1] - d[1] * xdiff[0]) / div
-                y = (d[0] * ydiff[1] - d[1] * ydiff[0]) / div
-                return x, y
-    raise ValueError("Lines do not intersect")
-
-
 def find_center_period(points, axis):
     """
     Find the center period of the given axis based on the points.
@@ -168,26 +124,6 @@ def find_center_period(points, axis):
         for i in range(len(sorted_points) - 1)
     ]
     return int(sum(gaps) / len(gaps))
-
-
-def are_lines_orthogonal(line1, line2, angle_tolerance=5):
-    """
-    Check if two lines are orthogonal.
-
-    Parameters: line1 (list): The first line defined by two points [point1, point2]. line2 (list): The second line
-    defined by two points [point1, point2]. angle_tolerance (float, optional): The maximum allowable difference in
-    angle degrees for the lines to be considered orthogonal. Default is 5.
-
-    Returns:
-        bool: True if the lines are orthogonal, False otherwise.
-    """
-    x1, y1 = line1[0]
-    x2, y2 = line1[1]
-    x3, y3 = line2[0]
-    x4, y4 = line2[1]
-    angle = math.degrees(math.atan2(y2 - y1, x2 - x1)) - math.degrees(math.atan2(y4 - y3, x4 - x3))
-
-    return abs(angle - 90) <= angle_tolerance or abs(abs(angle) - 270) <= angle_tolerance
 
 
 def find_orthogonal_lines(points, pixel_tolerance=1):
