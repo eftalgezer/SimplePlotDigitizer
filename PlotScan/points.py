@@ -157,20 +157,6 @@ def find_orthogonal_lines(points, pixel_tolerance=1):
     return orthogonal_lines
 
 
-def axis_coordinates_periods(line, axis):
-    """
-    Calculate the differences in coordinates along the specified axis for a line.
-
-    Parameters:
-        line (list): The line defined by two points [point1, point2].
-        axis (int): The axis to calculate the differences for (0 for X-axis, 1 for Y-axis).
-
-    Returns:
-        list: A list of differences in coordinates along the specified axis.
-    """
-    return [line[i + 1][axis] - line[i][axis] for i in range(len(line) - 1)]
-
-
 def find_missing_points(points, period_x, period_y, pixel_tolerance=1):
     """
     Find missing points on the axis based on the given points, center periods, and label periods.
