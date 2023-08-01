@@ -177,13 +177,12 @@ def find_orthogonal_lines(points, pixel_tolerance=1, angle_tolerance=5):
     return orthogonal_lines
 
 
-def find_missing_points(points, period_x, period_y, pixel_tolerance=1, angle_tolerance=5):
+def find_missing_points(points, pixel_tolerance=1, angle_tolerance=5):
     """
     Find missing points on the axis based on the given points, center periods, and label periods.
 
     Parameters: points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
-    center_y], label]. period_x (int): The center period of the X-axis. period_y (int): The center period of the
-    Y-axis. pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates. Default is 1.
+    center_y], label]. pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates. Default is 1.
 
     Returns: list: A list of missing points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
     center_y], label].
@@ -192,6 +191,8 @@ def find_missing_points(points, period_x, period_y, pixel_tolerance=1, angle_tol
     lines = find_orthogonal_lines(points, pixel_tolerance, angle_tolerance)
     line1 = lines[0]
     line2 = lines[1]
+    period_x = find_center_period(points, axis=0) * 2
+    period_y = find_center_period(points, axis=1) * 2
     label_period_x = find_period(points, 0)
     label_period_y = find_period(points, 1)
     min_x = min(points, key=lambda point: point[1][0])[1][0]
@@ -333,9 +334,7 @@ def find_points(img_path, pixel_tolerance=1, angle_tolerance=5):
         center_x = int((min(x) + max(x)) / 2)
         center_y = int((min(y) + max(y)) / 2)
         points[points.index(point)][1] = [center_x, center_y]
-    center_period_x = find_center_period(points, axis=0) * 2
-    center_period_y = find_center_period(points, axis=1) * 2
-    missing_points = find_missing_points(points, center_period_x, center_period_y, pixel_tolerance, angle_tolerance)
+    missing_points = find_missing_points(points, pixel_tolerance, angle_tolerance)
     points.extend(missing_points)
     points = sorted(points, key=lambda rect: rect[0][0][0])
     actual_points_x, actual_points_y = find_actual_points(points, pixel_tolerance)
