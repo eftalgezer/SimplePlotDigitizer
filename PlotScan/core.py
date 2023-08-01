@@ -252,12 +252,12 @@ def run(args):
     if args.data_point:
         points_ = list_to_points(args.data_point)
     else:
-        points = find_points(infile)
+        points = find_points(infile, args.pixel_tolerance)
         points_ = list_to_points([point[1] for point in points])
     if args.location:
         locations_ = list_to_points(args.location)
     else:
-        points = find_points(infile)
+        points = find_points(infile, args.pixel_tolerance)
         locations_ = list_to_points([point[0] for point in points])
     # logging.debug(f"data points {args.data_point} → location on image {args.location}")
 
