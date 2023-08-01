@@ -44,6 +44,7 @@ jobs:
             $PYMUPDF_SETUP_DEVENV = (Get-ChildItem $visualStudioInstallationPath -Recurse -Filter "DevEnv.exe" | Select-Object -First 1).FullName
             Invoke-WebRequest -Uri 'http://prdownloads.sourceforge.net/swig/swig-4.1.1.tar.gz' -OutFile 'swig-4.1.1.tar.gz'
             tar -xvzf swig-4.1.1.tar.gz -C .
+            git clone https://github.com/pymupdf/PyMuPDF.git
             cd PyMuPDF
             python setup.py install
             cd ..
