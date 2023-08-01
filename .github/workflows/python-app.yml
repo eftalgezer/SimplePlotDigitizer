@@ -29,7 +29,6 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
-      if: matrix.os != 'windows-latest' && matrix.python-version != '3.11'
       run: |
         pip install setuptools --upgrade
         pip install --upgrade pip
@@ -44,34 +43,28 @@ jobs:
         mkdir ~/.config/matplotlib/
         echo "backend: Agg" > ~/.config/matplotlib/matplotlibrc
     - name: Run entry point
-      if: (matrix.os != 'windows-latest' && matrix.python-version != '3.11') == true
       run: |
         pip install .
         PlotScan figures/trimmed.png
     - name: Lint with flake8
-      if: (matrix.os != 'windows-latest' && matrix.python-version != '3.11') == true
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
-      if: (matrix.os != 'windows-latest' && matrix.python-version != '3.11') == true
       run: |
         pytest
     - name: Generate Report
-      if: (matrix.os != 'windows-latest' && matrix.python-version != '3.11') == true
       run: |
         pip install codecov
         pip install pytest-cov
         pytest --cov=./ --cov-report=xml
         codecov
     - name: See coverage
-      if: (matrix.os != 'windows-latest' && matrix.python-version != '3.11') == true
       run: |
           ls
     - name: Upload coverage to Codecov
-      if: (matrix.os != 'windows-latest' && matrix.python-version != '3.11') == true
       uses: codecov/codecov-action@v3.1.4
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
@@ -79,7 +72,7 @@ jobs:
         files: ./coverage.xml
         flags: tests
     - name: Pushing reports to Codacy (Windows)
-      if: (matrix.os == 'windows-latest' && matrix.python-version != '3.11') == true
+      if: matrix.os == 'windows-latest'
       run: |
             git clone https://github.com/codacy/codacy-coverage-reporter.git
             cd codacy-coverage-reporter
