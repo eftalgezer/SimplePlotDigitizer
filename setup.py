@@ -45,7 +45,7 @@ setup(
         "numpy",
         "matplotlib",
         "paddlepaddle",
-        "paddleocr"
+        "paddleocr==2.6.1.3"
     ],
     project_urls={
         "Bug Reports": "https://github.com/eftalgezer/PlotScan/issues",
