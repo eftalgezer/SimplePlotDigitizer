@@ -28,13 +28,6 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install PyMuPDF for Python 3.11 on Windows
-      if: matrix.os == 'windows-latest' && matrix.python-version == '3.11'
-      run: |
-            curl https://files.pythonhosted.org/packages/4a/09/6afe87a8ea7acb6e4709223a704270ffe9929497add4d06b12305e229ba8/PyMuPDF-1.20.2.tar.gz --output PyMuPDF-1.20.2.tar.gz
-            mkdir pymupdf
-            tar -xvzf PyMuPDF-1.20.2.tar.gz -C pymupdf/
-            python pymupdf/PyMuPDF-1.20.2/setup.py install
     - name: Install dependencies
       run: |
         pip install setuptools --upgrade
