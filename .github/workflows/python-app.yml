@@ -31,7 +31,7 @@ jobs:
     - name: Install Visual Studio for Windows
       if: matrix.os == 'windows-latest'
       run: |
-            C:\Program Files (x86)\Microsoft Visual Studio\Installer\setup.exe
+            "C:\Program Files (x86)\Microsoft Visual Studio\Installer\setup.exe"
     - name: Install dependencies
       run: |
         pip install setuptools --upgrade
