@@ -29,7 +29,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install PyMuPDF for Python 3.11 for Windows
-      if: matrix.os == 'windows-latest' & matrix.python-version == '3.11'
+      if: matrix.os + matrix.python-version == 'windows-latest3.11'
       run: |
             pip install https://drive.google.com/file/d/1bYdtLr2tkyWZJr-TBSO8MB6w-BZTxkaG/view?usp=drive_link
     - name: Install dependencies
