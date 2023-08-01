@@ -51,7 +51,7 @@ def remove_duplicate_rectangles(rectangles, pixel_tolerance=1):
     return unique_rectangles
 
 
-def find_period(points, axis):
+def find_period(points, axis, angle_tolerance=5):
     """
     Find the period of the given axis based on the points.
 
@@ -61,7 +61,7 @@ def find_period(points, axis):
     Returns:
         int or None: The period of the given axis if found, or None if no period is detected.
     """
-    orthogonal_lines = find_orthogonal_lines(points)
+    orthogonal_lines = find_orthogonal_lines(points, angle_tolerance)
     line = orthogonal_lines[axis - 1]
     labels = [point[2] for point in points if point[1] in line]
     differences = [labels[i - 1] - labels[i] for i in range(len(labels) - 1)]
@@ -126,7 +126,27 @@ def find_center_period(points, axis):
     return int(sum(gaps) / len(gaps))
 
 
-def find_orthogonal_lines(points, pixel_tolerance=1):
+def are_lines_orthogonal(line1, line2, angle_tolerance=5):
+    """
+    Check if two lines are orthogonal.
+
+    Parameters: line1 (list): The first line defined by two points [point1, point2]. line2 (list): The second line
+    defined by two points [point1, point2]. angle_tolerance (float, optional): The maximum allowable difference in
+    angle degrees for the lines to be considered orthogonal. Default is 5.
+
+    Returns:
+        bool: True if the lines are orthogonal, False otherwise.
+    """
+    x1, y1 = line1[0]
+    x2, y2 = line1[1]
+    x3, y3 = line2[0]
+    x4, y4 = line2[1]
+    angle = math.degrees(math.atan2(y2 - y1, x2 - x1)) - math.degrees(math.atan2(y4 - y3, x4 - x3))
+
+    return abs(angle - 90) <= angle_tolerance or abs(abs(angle) - 270) <= angle_tolerance
+
+
+def find_orthogonal_lines(points, pixel_tolerance=1, angle_tolerance=5):
     """
     Find pairs of orthogonal lines among the given points.
 
@@ -152,12 +172,12 @@ def find_orthogonal_lines(points, pixel_tolerance=1):
             if len(orthogonal_lines) == 2:
                 line1 = orthogonal_lines[0]
                 line2 = orthogonal_lines[1]
-                if are_lines_orthogonal(line1, line2, angle_tolerance=5):
+                if are_lines_orthogonal(line1, line2, angle_tolerance):
                     break
     return orthogonal_lines
 
 
-def find_missing_points(points, period_x, period_y, pixel_tolerance=1):
+def find_missing_points(points, period_x, period_y, pixel_tolerance=1, angle_tolerance=5):
     """
     Find missing points on the axis based on the given points, center periods, and label periods.
 
@@ -169,7 +189,7 @@ def find_missing_points(points, period_x, period_y, pixel_tolerance=1):
     center_y], label].
     """
     missing_points = []
-    lines = find_orthogonal_lines(points, pixel_tolerance)
+    lines = find_orthogonal_lines(points, pixel_tolerance, angle_tolerance)
     line1 = lines[0]
     line2 = lines[1]
     label_period_x = find_period(points, 0)
@@ -281,7 +301,7 @@ def find_actual_points(points, pixel_tolerance=1):
     return actual_points_x, actual_points_y
 
 
-def find_points(img_path, pixel_tolerance=1):
+def find_points(img_path, pixel_tolerance=1, angle_tolerance=5):
     """
     Find the actual points (intersections) on the X and Y axes in a scientific figure image.
 
@@ -315,7 +335,7 @@ def find_points(img_path, pixel_tolerance=1):
         points[points.index(point)][1] = [center_x, center_y]
     center_period_x = find_center_period(points, axis=0) * 2
     center_period_y = find_center_period(points, axis=1) * 2
-    missing_points = find_missing_points(points, center_period_x, center_period_y, pixel_tolerance)
+    missing_points = find_missing_points(points, center_period_x, center_period_y, pixel_tolerance, angle_tolerance)
     points.extend(missing_points)
     points = sorted(points, key=lambda rect: rect[0][0][0])
     actual_points_x, actual_points_y = find_actual_points(points, pixel_tolerance)
