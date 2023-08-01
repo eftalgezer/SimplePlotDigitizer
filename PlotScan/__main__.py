@@ -12,6 +12,13 @@ def main():
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument("INPUT", type=Path, help="Input image file.")
     parser.add_argument(
+        "--pixel-tolerance",
+        "-tol",
+        required=False,
+        default=1,
+        help="The maximum allowable difference in pixel coordinates. Default is 1.",
+    )
+    parser.add_argument(
         "--data-point",
         "-p",
         required=False,
@@ -28,8 +35,7 @@ def main():
         default=None,
         action="append",
         help="Location of a points on figure in pixels (integer)."
-             " These values should appear in the same order as -p option."
-             " If not given, you will be asked to click on the figure.",
+             " These values should appear in the same order as -p option.",
     )
     parser.add_argument(
         "--plot",
