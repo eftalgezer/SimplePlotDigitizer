@@ -31,7 +31,7 @@ jobs:
     - name: Update Visual Studio for Windows
       if: matrix.os == 'windows-latest'
       run: |
-            vs_buildtools.exe updateall
+            vs_professional.exe updateall
     - name: Install dependencies
       run: |
         pip install setuptools --upgrade
