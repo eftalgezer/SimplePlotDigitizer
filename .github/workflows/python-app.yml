@@ -28,23 +28,14 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install Visual Studio Build Tools
+    - name: Set up Visual Studio for Windows
       if: matrix.os == 'windows-latest'
-      run: |
-        # Download Visual Studio Build Tools
-        Invoke-WebRequest -Uri 'https://aka.ms/vs/16/release/vs_buildtools.exe' -OutFile 'vs_buildtools.exe'
-        # Install Visual Studio Build Tools
-        .\vs_buildtools.exe --quiet --wait --norestart --nocache `
-            --installPath "./BuildTools" `
-            --add Microsoft.VisualStudio.Workload.VCTools
-        # Add Visual Studio Build Tools to PATH
-        $env:PATH += ';.\BuildTools\MSBuild\Current\Bin'
-        $env:PATH += ';.\BuildTools\VC\Tools\MSVC\14.30.30704\bin\Hostx64\x64'
-        ls BuildTools
+      uses: microsoft/setup-msbuild@v1.1
     - name: Install PyMuPDF on Windows
       if: matrix.os == 'windows-latest'
       run: |
-            set PYMUPDF_SETUP_DEVENV = ".\BuildTools\Common7\IDE\devenv.exe"
+            for /f "usebackq tokens=1* delims=: " %%i in (`"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest`) do (if /i "%%i"=="productPath" set devenv=%%j)
+            set PYMUPDF_SETUP_DEVENV = %devenv%
             Invoke-WebRequest -Uri 'http://prdownloads.sourceforge.net/swig/swig-4.1.1.tar.gz' -OutFile 'swig-4.1.1.tar.gz'
             tar -xvzf swig-4.1.1.tar.gz -C .
             cd PyMuPDF
