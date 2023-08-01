@@ -381,6 +381,7 @@ def find_points(img_path):
         result = ocr.ocr(str(img_path), cls=True)
         for res in result:
             points.extend([line[0], None, float(line[1][0])] for line in res if line[1][0].isnumeric())
+    print(points)
     points = sorted(points, key=lambda rect: rect[0][0][0])
     points = remove_overlapping_rectangles(remove_duplicate_rectangles(points))
     for point in points:
