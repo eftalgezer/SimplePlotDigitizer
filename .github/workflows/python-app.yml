@@ -31,8 +31,9 @@ jobs:
     - name: Install PyMuPDF for Python 3.11 on Windows
       if: matrix.os == 'windows-latest' && matrix.python-version == '3.11'
       run: |
-            curl https://files.pythonhosted.org/packages/52/bd/a02408ac47900f270b2de4b48b8cb8581a87b9e5a35a7653bfe6f0c77908/PyMuPDF-1.21.0-cp311-cp311-win_amd64.whl --output PyMuPDF-1.21.0-cp311-cp311-win_amd64.whl
-            pip install PyMuPDF-1.21.0-cp311-cp311-win_amd64.whl
+            curl https://files.pythonhosted.org/packages/4a/09/6afe87a8ea7acb6e4709223a704270ffe9929497add4d06b12305e229ba8/PyMuPDF-1.20.2.tar.gz --output PyMuPDF-1.20.2.tar.gz
+            tar -xvzf PyMuPDF-1.20.2.tar.gz -C pymupdf/
+            python pymupdf/setup.py install
     - name: Install dependencies
       run: |
         pip install setuptools --upgrade
