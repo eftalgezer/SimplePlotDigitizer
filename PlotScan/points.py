@@ -60,7 +60,7 @@ def find_period(points, axis, pixel_tolerance=1):
     Returns:
         int or None: The period of the given axis if found, or None if no period is detected.
     """
-    lines = separate_lines(points, pixel_tolerance=1)
+    lines = separate_lines(points, pixel_tolerance)
     line = lines[axis]
     labels = [point[2] for point in points if point in line]
     differences = [labels[i - 1] - labels[i] for i in range(len(labels) - 1)]
@@ -125,13 +125,13 @@ def find_center_period(points, axis):
     return int(sum(gaps) / len(gaps))
 
 
-
 def find_missing_points(points, pixel_tolerance=1):
     """
     Find missing points on the axis based on the given points, center periods, and label periods.
 
     Parameters: points (list): List of points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
-    center_y], label]. pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates. Default is 1.
+    center_y], label]. pixel_tolerance (int, optional): The maximum allowable difference in pixel coordinates.
+    Default is 1.
 
     Returns: list: A list of missing points in the format [[[x1, y1], [x2, y2], [x3, y3], [x4, y4]], [center_x,
     center_y], label].
