@@ -35,16 +35,16 @@ jobs:
         Invoke-WebRequest -Uri 'https://aka.ms/vs/16/release/vs_buildtools.exe' -OutFile 'vs_buildtools.exe'
         # Install Visual Studio Build Tools
         .\vs_buildtools.exe --quiet --wait --norestart --nocache `
-            --installPath "C:\BuildTools" `
+            --installPath "./BuildTools" `
             --add Microsoft.VisualStudio.Workload.VCTools
         # Add Visual Studio Build Tools to PATH
-        $env:PATH += ';C:\BuildTools\MSBuild\Current\Bin'
-        $env:PATH += ';C:\BuildTools\VC\Tools\MSVC\14.30.30704\bin\Hostx64\x64'
-        ls C:\BuildTools
+        $env:PATH += ';.\BuildTools\MSBuild\Current\Bin'
+        $env:PATH += ';.\BuildTools\VC\Tools\MSVC\14.30.30704\bin\Hostx64\x64'
+        ls BuildTools
     - name: Install PyMuPDF on Windows
       if: matrix.os == 'windows-latest'
       run: |
-            set PYMUPDF_SETUP_DEVENV = "C:\BuildTools\Common7\IDE\devenv.exe"
+            set PYMUPDF_SETUP_DEVENV = ".\BuildTools\Common7\IDE\devenv.exe"
             Invoke-WebRequest -Uri 'http://prdownloads.sourceforge.net/swig/swig-4.1.1.tar.gz' -OutFile 'swig-4.1.1.tar.gz'
             tar -xvzf swig-4.1.1.tar.gz -C .
             cd PyMuPDF
