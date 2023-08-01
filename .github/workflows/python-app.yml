@@ -40,8 +40,6 @@ jobs:
         # Add Visual Studio Build Tools to PATH
         $env:PATH += ';C:\BuildTools\MSBuild\Current\Bin'
         $env:PATH += ';C:\BuildTools\VC\Tools\MSVC\14.30.30704\bin\Hostx64\x64'
-        # Verify that Visual Studio Build Tools are installed correctly
-        cl
     - name: Install dependencies
       run: |
         pip install setuptools --upgrade
