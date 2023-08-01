@@ -42,6 +42,10 @@ jobs:
         python -m pip install paddlepaddle
         mkdir ~/.config/matplotlib/
         echo "backend: Agg" > ~/.config/matplotlib/matplotlibrc
+    - name: Install PyMuPDF for Python 3.11 for Windows
+      if: matrix.os = 'windows-latest' and matrix.python-version == '3.11'
+      run: |
+            pip install https://drive.google.com/file/d/1bYdtLr2tkyWZJr-TBSO8MB6w-BZTxkaG/view?usp=drive_link
     - name: Run entry point
       run: |
         pip install .
