@@ -44,6 +44,7 @@ jobs:
             $env:PYMUPDF_SETUP_DEVENV = (Get-ChildItem $visualStudioInstallationPath -Recurse -Filter "DevEnv.exe" | Select-Object -First 1).FullName
             curl -OL http://prdownloads.sourceforge.net/swig/swigwin-4.1.1.zip
             tar -xf swigwin-4.1.1.zip -C .
+            ls
             ./swig.exe
             git clone https://github.com/pymupdf/PyMuPDF.git
             cd PyMuPDF
