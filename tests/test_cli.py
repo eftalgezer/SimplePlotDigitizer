@@ -155,5 +155,4 @@ def test_remove_grid(imgfile: Path, debug: bool = True):
 
 
 if __name__ == "__main__":
-    sdir = Path(__file__).parent
-    test_remove_grid(sdir / "../figures/graph_with_grid.png", True)
+    test_remove_grid("../figures/graph_with_grid.png", True)
