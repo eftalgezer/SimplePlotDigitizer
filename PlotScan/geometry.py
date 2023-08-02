@@ -180,7 +180,7 @@ def test_origin():
 
     pts = [Point(23, 26), Point(140, 23), Point(22, 106)]
     origin = find_origin(pts)
-    assert origin == Point(22, 24), o
+    assert origin == Point(22, 24), origin
 
     pts = [Point(2, 12), Point(897, 12), Point(2, 183)]
     origin = find_origin(pts)
