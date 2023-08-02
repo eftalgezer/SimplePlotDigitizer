@@ -8,7 +8,7 @@ from .core import run
 
 def main():
     """Main function"""
-    description = """Digitize image."""
+    description = """A command-line tool for extracting data from scientific figure images."""
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument(
         "INPUT",
