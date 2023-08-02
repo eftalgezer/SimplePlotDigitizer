@@ -30,7 +30,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Set up Visual Studio 2019 for Windows with Python 3.11
       if: "startsWith(matrix.os, 'windows') && matrix.python-version == '3.11'"
-      uses: microsoft/setup-msbuild@v1.1
+      uses: microsoft/setup-msbuild@v1.3
     - name: Install PyMuPDF on Windows with Python 3.11
       if: "startsWith(matrix.os, 'windows') && matrix.python-version == '3.11'"
       run: |
