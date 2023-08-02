@@ -227,11 +227,8 @@ def find_actual_points(points, pixel_tolerance=1):
         raise ValueError("Lines are parallel")
     actual_points_x = [[[lines_x[0][1][0], lines_y[0][1][1]], [lines_x[0][2], lines_y[0][2]]]]
     actual_points_y = [[[lines_x[0][1][0], lines_y[0][1][1]], [lines_x[0][2], lines_y[0][2]]]]
-    for point in lines_x[1:]:
-        y_projection = lines_y[0][1][1]
-        actual_points_x.append([[point[1][0], y_projection], [point[2], lines_y[0][2]]])
-    for point in lines_y[1:]:
-        actual_points_y.append([[lines_x[0][1][0], point[1][1]], [lines_x[0][2], point[2]]])
+    actual_points_x.extend([[point[1][0], lines_y[0][1][1]], [point[2], lines_y[0][2]]] for point in lines_x[1:])
+    actual_points_y.extend([[lines_x[0][1][0], point[1][1]], [lines_x[0][2], point[2]]] for point in lines_y[1:])
     return actual_points_x, actual_points_y
 
 
