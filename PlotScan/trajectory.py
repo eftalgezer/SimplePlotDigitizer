@@ -155,8 +155,8 @@ def find_trajectory(img: np.ndarray, pixel: int, T):
     ), f"{pixel} is outside the range: [{img.min()}, {img.max()}]"
 
     # Find all pixels which belongs to a trajectory.
-    o = 6
-    _clower, _cupper = _valid_px(pixel - o // 2), _valid_px(pixel + o // 2)
+    origin = 6
+    _clower, _cupper = _valid_px(pixel - origin // 2), _valid_px(pixel + origin // 2)
 
     Y, X = np.where((img >= _clower) & (img <= _cupper))
     traj = defaultdict(list)
