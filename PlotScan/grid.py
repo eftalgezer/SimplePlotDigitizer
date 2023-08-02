@@ -37,7 +37,6 @@ Usage:
     # Test grid removal on an image and save the results
     test_remove_grid("image.png", debug=True)
 """
-from pathlib import Path
 import tempfile
 import cv2 as cv
 import numpy as np
