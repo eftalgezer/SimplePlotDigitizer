@@ -40,7 +40,6 @@ def main():
         required=False,
         default=None,
         action="append",
-        type=int,
         help="Location of the points on the figure in pixels (integer). "
              "These values should appear in the same order as the -p option.",
     )
