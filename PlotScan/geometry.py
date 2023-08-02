@@ -174,16 +174,16 @@ def test_origin():
     Returns:
         None.
     """
-    pts = [Point(81, 69), Point(1779, 68), Point(81, 449)]
-    p = find_origin(pts)
-    assert p == Point(81, 68), p == Point(81, 68)
+    points = [Point(81, 69), Point(1779, 68), Point(81, 449)]
+    point = find_origin(points)
+    assert point == Point(81, 68), point == Point(81, 68)
 
-    pts = [Point(23, 26), Point(140, 23), Point(22, 106)]
-    origin = find_origin(pts)
+    points = [Point(23, 26), Point(140, 23), Point(22, 106)]
+    origin = find_origin(points)
     assert origin == Point(22, 24), origin
 
-    pts = [Point(2, 12), Point(897, 12), Point(2, 183)]
-    origin = find_origin(pts)
+    points = [Point(2, 12), Point(897, 12), Point(2, 183)]
+    origin = find_origin(points)
     assert origin == Point(2, 12), 0
 
 
