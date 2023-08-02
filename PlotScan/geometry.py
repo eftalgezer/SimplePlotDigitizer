@@ -26,9 +26,6 @@ Usage:
     points = [Point(10, 20), Point(30, 40), Point(50, 60)]
     origin = find_origin(points)  # Result: Point(10, 20)
 
-    # Testing the find_origin function
-    test_origin()
-
 Note:
     - The Point class provides methods for comparison, hashing, and string representation.
     - The find_origin function finds the colinear points from the given list of points and computes the origin as the
@@ -165,27 +162,3 @@ def find_origin(pts: T.List[Point]) -> Point:
     originY = statistics.mean([p.y for p in horizontal])
     originX = statistics.mean([p.x for p in verticals])
     return Point(originX, originY)
-
-
-def test_origin():
-    """
-    Test function for the find_origin() function.
-
-    Returns:
-        None.
-    """
-    points = [Point(81, 69), Point(1779, 68), Point(81, 449)]
-    point = find_origin(points)
-    assert point == Point(81, 68), point == Point(81, 68)
-
-    points = [Point(23, 26), Point(140, 23), Point(22, 106)]
-    origin = find_origin(points)
-    assert origin == Point(22, 24), origin
-
-    points = [Point(2, 12), Point(897, 12), Point(2, 183)]
-    origin = find_origin(points)
-    assert origin == Point(2, 12), 0
-
-
-if __name__ == "__main__":
-    test_origin()
