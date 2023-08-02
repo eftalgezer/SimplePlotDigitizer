@@ -137,7 +137,7 @@ def test_origin():
     assert origin == Point(2, 12), 0
 
 
-def test_remove_grid(imgfile: Path, debug: bool = True):
+def remove_grid_tester(imgfile: Path, debug: bool = True):
     """
     Test function to demonstrate grid removal on an image.
 
@@ -154,5 +154,5 @@ def test_remove_grid(imgfile: Path, debug: bool = True):
         _save_fig(withoutgrid, f"{TEMP}/without_grid.png")
 
 
-if __name__ == "__main__":
-    test_remove_grid("../figures/graph_with_grid.png", True)
+def test_remove_grid():
+    remove_grid_tester("../figures/graph_with_grid.png", True)
