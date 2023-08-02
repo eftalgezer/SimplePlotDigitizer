@@ -152,8 +152,8 @@ def find_origin(points: T.List[Point]) -> Point:
                 continue
             m = (point2.y - point1.y) / (point2.x - point1.x)
             if abs(m) < math.tan(math.pi / 180 * 5):  # <5 deg is horizontal.
-                horizontal.add(p1)
-                horizontal.add(p2)
+                horizontal.add(point1)
+                horizontal.add(point2)
 
     points = set(points)
     assert len(horizontal) > 1, f"Must have at least two colinear points {horizontal}"
