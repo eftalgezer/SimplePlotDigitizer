@@ -134,3 +134,25 @@ def test_origin():
     points = [Point(2, 12), Point(897, 12), Point(2, 183)]
     origin = find_origin(points)
     assert origin == Point(2, 12), 0
+
+
+def test_remove_grid(imgfile: Path, debug: bool = True):
+    """
+    Test function to demonstrate grid removal on an image.
+
+    Parameters:
+        imgfile (Path): The path to the input image file.
+        debug (bool, optional): If True, the function will save intermediate results for debugging (default is True).
+    """
+    img = cv.imread(str(imgfile), 0)
+    if debug:
+        _save_fig(img, f"{TEMP}/orig.png")
+    # assert withoutgrid.mean() > img.mean()
+    if debug:
+        withoutgrid = remove_grid(img)
+        _save_fig(withoutgrid, f"{TEMP}/without_grid.png")
+
+
+if __name__ == "__main__":
+    sdir = Path(__file__).parent
+    test_remove_grid(sdir / "../figures/graph_with_grid.png", True)
