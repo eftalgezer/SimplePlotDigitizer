@@ -8,15 +8,15 @@ Classes:
     Point: A class representing 2D points with x and y coordinates.
 
 Functions:
-    find_origin(pts: List[Point]) -> Point:
+    find_origin(points: List[Point]) -> Point:
         Compute the origin of given points based on their colinearity.
 
 Usage:
     from .geometry import Point, find_origin
 
     # Creating Point objects
-    p1 = Point(10, 20)
-    p2 = Point(30, 40)
+    point1 = Point(10, 20)
+    point2 = Point(30, 40)
 
     # Converting a coordinate representation to a Point object
     coords = "50, 60"
@@ -135,30 +135,30 @@ class Point:
         return iter((self.x, self.y))
 
 
-def find_origin(pts: T.List[Point]) -> Point:
+def find_origin(points: T.List[Point]) -> Point:
     """
     Compute the origin of given points.
 
     Parameters:
-        pts (List[Point]): A list of Point objects representing the points.
+        points (List[Point]): A list of Point objects representing the points.
 
     Returns:
         Point: The Point object representing the origin.
     """
     horizontal = set()
-    for i, p1 in enumerate(pts):
-        for p2 in pts[i + 1:]:
-            if abs(p1.x - p2.x) <= 2:
+    for i, point1 in enumerate(points):
+        for point2 in points[i + 1:]:
+            if abs(point1.x - point2.x) <= 2:
                 continue
-            m = (p2.y - p1.y) / (p2.x - p1.x)
+            m = (point2.y - point1.y) / (point2.x - point1.x)
             if abs(m) < math.tan(math.pi / 180 * 5):  # <5 deg is horizontal.
                 horizontal.add(p1)
                 horizontal.add(p2)
 
-    points = set(pts)
+    points = set(points)
     assert len(horizontal) > 1, f"Must have at least two colinear points {horizontal}"
     verticals = points - horizontal
     assert len(verticals) > 0, "Must be at least one vertical point"
-    originY = statistics.mean([p.y for p in horizontal])
-    originX = statistics.mean([p.x for p in verticals])
-    return Point(originX, originY)
+    origin_y = statistics.mean([point.y for point in horizontal])
+    origin_x = statistics.mean([point.x for point in verticals])
+    return Point(origin_x, origin_y)
