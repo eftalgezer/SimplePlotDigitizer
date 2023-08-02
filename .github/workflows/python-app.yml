@@ -47,6 +47,8 @@ jobs:
             cd PyMuPDF-1.20.2
             python setup.py install
             cd ..
+            del /f 1.20.2.zip
+            rmdir /s PyMuPDF-1.20.2
     - name: Install dependencies
       run: |
         pip install setuptools --upgrade
