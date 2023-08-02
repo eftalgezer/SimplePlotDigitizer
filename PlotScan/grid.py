@@ -37,11 +37,8 @@ Usage:
     # Test grid removal on an image and save the results
     test_remove_grid("image.png", debug=True)
 """
-import tempfile
 import cv2 as cv
 import numpy as np
-
-TEMP = tempfile.gettempdir()
 
 
 def _save_fig(img, outfile):
