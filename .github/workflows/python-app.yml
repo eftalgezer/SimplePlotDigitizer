@@ -43,6 +43,7 @@ jobs:
             [string] $visualStudioInstallationPath = (Get-VSSetupInstance | Select-VSSetupInstance -Latest -Require Microsoft.Component.MSBuild).InstallationPath
             $env:PYMUPDF_SETUP_DEVENV = (Get-ChildItem $visualStudioInstallationPath -Recurse -Filter "DevEnv.exe" | Select-Object -First 1).FullName
             curl -OL https://github.com/pymupdf/PyMuPDF/archive/refs/tags/1.20.2.zip
+            ls
             cd PyMuPDF-1.20.2
             python setup.py install
             cd ..
