@@ -127,25 +127,3 @@ def remove_grid(
     for cnt in cnts:
         cv.drawContours(img, [cnt], -1, background_color, grid_size)
     return img
-
-
-def test_remove_grid(imgfile: Path, debug: bool = True):
-    """
-    Test function to demonstrate grid removal on an image.
-
-    Parameters:
-        imgfile (Path): The path to the input image file.
-        debug (bool, optional): If True, the function will save intermediate results for debugging (default is True).
-    """
-    img = cv.imread(str(imgfile), 0)
-    if debug:
-        _save_fig(img, f"{TEMP}/orig.png")
-    # assert withoutgrid.mean() > img.mean()
-    if debug:
-        withoutgrid = remove_grid(img)
-        _save_fig(withoutgrid, f"{TEMP}/without_grid.png")
-
-
-if __name__ == "__main__":
-    sdir = Path(__file__).parent
-    test_remove_grid(sdir / "../figures/graph_with_grid.png", True)
