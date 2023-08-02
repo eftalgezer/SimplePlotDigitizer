@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
+        os: ["ubuntu-latest", "macos-latest", "windows-2019"]
         python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
 
     steps:
@@ -29,10 +29,10 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Set up Visual Studio 2019 for Windows
-      if: matrix.os == 'windows-latest'
+      if: matrix.os == 'windows-2019'
       uses: microsoft/setup-msbuild@v1.1
     - name: Install PyMuPDF on Windows
-      if: matrix.os == 'windows-latest'
+      if: matrix.os == 'windows-2019'
       run: |
             [bool] $vsSetupExists = $null -ne (Get-Command Get-VSSetupInstance -ErrorAction SilentlyContinue)
             if (!$vsSetupExists)
@@ -43,7 +43,7 @@ jobs:
             [string] $visualStudioInstallationPath = (Get-VSSetupInstance | Select-VSSetupInstance -Latest -Require Microsoft.Component.MSBuild).InstallationPath
             $env:PYMUPDF_SETUP_DEVENV = (Get-ChildItem $visualStudioInstallationPath -Recurse -Filter "DevEnv.exe" | Select-Object -First 1).FullName
             curl -OL http://prdownloads.sourceforge.net/swig/swigwin-4.1.1.zip
-            tar -xf swig-4.1.1.tar.gz -C .
+            tar -xf swigwin-4.1.1.zip -C .
             ./swig.exe
             git clone https://github.com/pymupdf/PyMuPDF.git
             cd PyMuPDF
@@ -94,7 +94,7 @@ jobs:
         files: ./coverage.xml
         flags: tests
     - name: Pushing reports to Codacy (Windows)
-      if: matrix.os == 'windows-latest'
+      if: matrix.os == 'windows-2019'
       run: |
             git clone https://github.com/codacy/codacy-coverage-reporter.git
             cd codacy-coverage-reporter
@@ -102,7 +102,7 @@ jobs:
             $jar = Convert-Path ../codacy-coverage-reporter/target/codacy-coverage-reporter-assembly-*.jar
             java -jar $jar report -r ../coverage.xml --project-token ${{secrets.CODACY_TOKEN}}
     - name: Pushing reports to Codacy (others)
-      if: matrix.os != 'windows-latest'
+      if: matrix.os != 'windows-2019'
       run: |
             export CODACY_PROJECT_TOKEN=${{secrets.CODACY_TOKEN}}
             LATEST_VERSION="$(curl -Ls https://artifacts.codacy.com/bin/codacy-coverage-reporter/latest)"
