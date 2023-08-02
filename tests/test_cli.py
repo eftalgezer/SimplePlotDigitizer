@@ -29,6 +29,7 @@ from pathlib import Path
 import numpy as np
 import PlotScan
 from PlotScan.geometry import Point, find_origin
+from PlotScan.grid import *
 
 HERE = Path(__file__).parent.resolve()
 
