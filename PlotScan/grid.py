@@ -16,9 +16,6 @@ Functions:
     remove_grid(orig: np.ndarray, num_iter: int = 3, background_color: int = 255, grid_size: int = 2) -> np.ndarray:
         Remove grid lines from the image using a combination of morphological operations.
 
-    test_remove_grid(imgfile: Path, debug: bool = True):
-        Test function to demonstrate grid removal on an image.
-
 Usage:
     from .grid import remove_horizontal_grid_simple, heal, remove_grid, test_remove_grid
 
@@ -39,18 +36,6 @@ Usage:
 """
 import cv2 as cv
 import numpy as np
-
-
-def _save_fig(img, outfile):
-    """
-    Save the image to the specified output file.
-
-    Parameters:
-        img (np.ndarray): The image to be saved as a NumPy array representing grayscale image data.
-        outfile (str): The path to the output file where the image will be saved.
-    """
-    print(f"Saved to {outfile}")
-    cv.imwrite(outfile, img)
 
 
 def remove_horizontal_grid_simple(img) -> np.ndarray:
