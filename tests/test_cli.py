@@ -25,6 +25,7 @@ Functions:
 """
 
 import subprocess
+import tempfile
 from pathlib import Path
 import numpy as np
 import PlotScan
@@ -32,6 +33,7 @@ from PlotScan.geometry import Point, find_origin
 from PlotScan.grid import *
 
 HERE = Path(__file__).parent.resolve()
+TEMP = tempfile.gettempdir()
 
 
 def _run_cmdline(infile: Path, points=None, locations=None):
