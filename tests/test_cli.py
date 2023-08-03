@@ -76,6 +76,18 @@ def _check_csv_file(csvfile):
     assert y.min() < y.mean() < y.max()
 
 
+def _save_fig(img, outfile):
+    """
+    Save the image to the specified output file.
+
+    Parameters:
+        img (np.ndarray): The image to be saved as a NumPy array representing grayscale image data.
+        outfile (str): The path to the output file where the image will be saved.
+    """
+    print(f"Saved to {outfile}")
+    cv.imwrite(outfile, img)
+
+
 def test_trimmeed():
     """Test if the application can process the 'trimmed.png' image and generate a trajectory file."""
     csvfile = _run_cmdline(
