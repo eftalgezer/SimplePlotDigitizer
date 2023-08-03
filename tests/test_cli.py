@@ -153,7 +153,7 @@ def test_origin():
 
 def remove_grid_tester(imgfile: Path, debug: bool = True):
     """
-    Test function to demonstrate grid removal on an image.
+    Tester function to demonstrate grid removal on an image.
 
     Parameters:
         imgfile (Path): The path to the input image file.
@@ -169,4 +169,4 @@ def remove_grid_tester(imgfile: Path, debug: bool = True):
 
 
 def test_remove_grid():
-    remove_grid_tester(Path("../figures/graph_with_grid.png"), True)
+    remove_grid_tester(HERE / ".." / "figures" / "graph_with_grid.png"), True)
