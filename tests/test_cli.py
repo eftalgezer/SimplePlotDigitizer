@@ -169,4 +169,4 @@ def remove_grid_tester(imgfile: Path, debug: bool = True):
 
 
 def test_remove_grid():
-    remove_grid_tester(HERE / ".." / "figures" / "graph_with_grid.png"), True)
+    remove_grid_tester(HERE / ".." / "figures" / "graph_with_grid.png", True)
