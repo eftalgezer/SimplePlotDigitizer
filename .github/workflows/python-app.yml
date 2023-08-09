@@ -21,6 +21,9 @@ jobs:
       matrix:
         os: ["ubuntu-latest", "macos-latest", "windows-2019", "windows-latest"]
         python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+        exclude:
+          - os: windows-latest
+            python-version: "3.11"
 
     steps:
     - uses: actions/checkout@v3
@@ -50,7 +53,6 @@ jobs:
             rm -Force 1.20.2.zip
             rd -r -fo PyMuPDF-1.20.2
     - name: Install dependencies
-      if: "!(matrix.os == 'windows-latest' && matrix.python-version == '3.11')"
       run: |
         pip install setuptools --upgrade
         pip install --upgrade pip
@@ -65,34 +67,28 @@ jobs:
         mkdir ~/.config/matplotlib/
         echo "backend: Agg" > ~/.config/matplotlib/matplotlibrc
     - name: Lint with flake8
-      if: "!(matrix.os == 'windows-latest' && matrix.python-version == '3.11')"
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Run entry point
-      if: "!(matrix.os == 'windows-latest' && matrix.python-version == '3.11')"
       run: |
         pip install .
         PlotScan figures/trimmed.png
     - name: Test with pytest
-      if: "!(matrix.os == 'windows-latest' && matrix.python-version == '3.11')"
       run: |
         pytest
     - name: Generate Report
-      if: "!(matrix.os == 'windows-latest' && matrix.python-version == '3.11')"
       run: |
         pip install codecov
         pip install pytest-cov
         pytest --cov=./ --cov-report=xml
         codecov
     - name: See coverage
-      if: "!(matrix.os == 'windows-latest' && matrix.python-version == '3.11')"
       run: |
           ls
     - name: Upload coverage to Codecov
-      if: "!(matrix.os == 'windows-latest' && matrix.python-version == '3.11')"
       uses: codecov/codecov-action@v3.1.4
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
@@ -100,7 +96,7 @@ jobs:
         files: ./coverage.xml
         flags: tests
     - name: Pushing reports to Codacy (Windows)
-      if: "startsWith(matrix.os, 'windows') && !(matrix.os == 'windows-latest' && matrix.python-version == '3.11')"
+      if: "startsWith(matrix.os, 'windows')"
       run: |
             git clone https://github.com/codacy/codacy-coverage-reporter.git
             cd codacy-coverage-reporter
